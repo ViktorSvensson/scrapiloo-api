@@ -107,20 +107,22 @@ interface ScrapilooDatasetMap {
   loans: ScrapilooLoan;
 }
 
-interface ApiResponse {
-  data: {[key: string]: string | number | boolean};
-  schema: {
-    [key: string]: {type: TypeName; default: string | number | boolean};
-  };
-}
+const CacheMap = new Map<
+  string,
+  {
+    entries: {[key: string]: string | number | boolean};
+    schema: {type: TypeName; default: string | number | boolean};
+  }
+>();
 
 export default async function Scrapiloo<
   D extends keyof ScrapilooDatasetMap,
   B extends BaseEntry = BaseEntry,
   T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]
 >(config: {dataset: D; endpoint: string; prototype: {new (): B}}) {
-  const endpointUrl = `${config.endpoint}?dataset=${config.dataset}`;
-  const apiOutput = await axios.get(endpointUrl);
+  const apiOutput = await axios.get(
+    `${config.endpoint}?dataset=${config.dataset}`
+  );
   const entries: {[key: string]: string | number | boolean} =
     apiOutput.data.data;
   const schema: {
@@ -129,7 +131,7 @@ export default async function Scrapiloo<
 
   function all(): (T & B)[] {
     return Array.from(
-      new Set(Object.keys(data).map((key) => key.split(":")[0])).values()
+      new Set(Object.keys(entries).map((key) => key.split(":")[0])).values()
     ).map((key) => {
       return get(key);
     });
@@ -153,7 +155,7 @@ export default async function Scrapiloo<
       const entryKey = `${key}:${ref}`;
 
       let $data = data(
-        entryKey in data ? entries[entryKey] : def.default,
+        entryKey in entries ? entries[entryKey] : def.default,
         def.type
       );
 
