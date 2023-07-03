@@ -33,18 +33,6 @@ export * from "./URLTypeImpl";
 export * from "./UnitType";
 export * from "./UnitTypeImpl";
 
-/**
- * @author     Carl Viktor Svensson
- * @license    Apache-2.0
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
- */
-
 import axios from "axios";
 import {BooleanTypeImpl} from "./BooleanTypeImpl";
 import {CurrencyTypeImpl} from "./CurrencyTypeImpl";
@@ -122,9 +110,9 @@ export default async function Scrapiloo<
   D extends keyof ScrapilooDatasetMap,
   B extends BaseEntry = BaseEntry,
   T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]
->(dataset: D, prototype: {new (): B}) {
+>(config: {dataset: D; endpoint: string; prototype: {new (): B}}) {
   const apiOutput = await axios.get(
-    `http://localhost:1337/api/entries?dataset=${dataset}`
+    `${config.endpoint}?dataset=${config.dataset}`
   );
   const entries: {[key: string]: string | number | boolean} =
     apiOutput.data.data;
@@ -152,7 +140,7 @@ export default async function Scrapiloo<
   }
 
   function get(key: string): T & B {
-    const res: any = new prototype();
+    const res: any = new config.prototype();
     res.__key = entries[`${key}:__key`];
     for (const [ref, def] of Object.entries(schema)) {
       const entryKey = `${key}:${ref}`;
