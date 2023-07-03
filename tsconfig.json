@@ -15,7 +15,7 @@
     "strict": true,
     "strictNullChecks": false,
     "strictFunctionTypes": true,
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext"]
   },
   "include": ["src/**/*"]
 }

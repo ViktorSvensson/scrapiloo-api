@@ -34,6 +34,7 @@ export * from "./UnitType";
 export * from "./UnitTypeImpl";
 
 import axios from "axios";
+
 import {BooleanTypeImpl} from "./BooleanTypeImpl";
 import {CurrencyTypeImpl} from "./CurrencyTypeImpl";
 import {DateTypeImpl} from "./DateTypeImpl";
@@ -106,19 +107,31 @@ interface ScrapilooDatasetMap {
   loans: ScrapilooLoan;
 }
 
+interface ApiResponse {
+  entries: {[key: string]: string | number | boolean};
+  schema: {
+    [key: string]: {type: TypeName; default: string | number | boolean};
+  };
+}
+const CacheMap = new Map<string, ApiResponse>();
+
 export default async function Scrapiloo<
   D extends keyof ScrapilooDatasetMap,
   B extends BaseEntry = BaseEntry,
   T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]
 >(config: {dataset: D; endpoint: string; prototype: {new (): B}}) {
-  const apiOutput = await axios.get(
-    `${config.endpoint}?dataset=${config.dataset}`
-  );
-  const entries: {[key: string]: string | number | boolean} =
-    apiOutput.data.data;
-  const schema: {
-    [key: string]: {type: TypeName; default: string | number | boolean};
-  } = apiOutput.data.schema;
+  const endpointUrl = `${config.endpoint}?dataset=${config.dataset}`;
+  const {entries, schema}: ApiResponse = CacheMap.has(endpointUrl)
+    ? CacheMap.get(endpointUrl)
+    : (await axios.get(endpointUrl)).data;
+  // const apiOutput = await axios.get(
+  //
+  // );
+  // const entries: {[key: string]: string | number | boolean} =
+  //   apiOutput.data.data;
+  // const schema: {
+  //   [key: string]: {type: TypeName; default: string | number | boolean};
+  // } = apiOutput.data.schema;
 
   function all(): (T & B)[] {
     return Array.from(
