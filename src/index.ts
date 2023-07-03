@@ -113,7 +113,6 @@ interface ApiResponse {
     [key: string]: {type: TypeName; default: string | number | boolean};
   };
 }
-const CacheMap = new Map<string, ApiResponse>();
 
 export default async function Scrapiloo<
   D extends keyof ScrapilooDatasetMap,
@@ -121,17 +120,12 @@ export default async function Scrapiloo<
   T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]
 >(config: {dataset: D; endpoint: string; prototype: {new (): B}}) {
   const endpointUrl = `${config.endpoint}?dataset=${config.dataset}`;
-  const {data: entries, schema}: ApiResponse = CacheMap.has(endpointUrl)
-    ? CacheMap.get(endpointUrl)
-    : (await axios.get(endpointUrl)).data;
-  // const apiOutput = await axios.get(
-  //
-  // );
-  // const entries: {[key: string]: string | number | boolean} =
-  //   apiOutput.data.data;
-  // const schema: {
-  //   [key: string]: {type: TypeName; default: string | number | boolean};
-  // } = apiOutput.data.schema;
+  const apiOutput = await axios.get(endpointUrl);
+  const entries: {[key: string]: string | number | boolean} =
+    apiOutput.data.data;
+  const schema: {
+    [key: string]: {type: TypeName; default: string | number | boolean};
+  } = apiOutput.data.schema;
 
   function all(): (T & B)[] {
     return Array.from(
