@@ -33,7 +33,7 @@ export * from "./URLTypeImpl";
 export * from "./UnitType";
 export * from "./UnitTypeImpl";
 
-import axios from "axios";
+import fetch from "node-fetch";
 
 import {BooleanTypeImpl} from "./BooleanTypeImpl";
 import {CurrencyTypeImpl} from "./CurrencyTypeImpl";
@@ -107,27 +107,24 @@ interface ScrapilooDatasetMap {
   loans: ScrapilooLoan;
 }
 
-const CacheMap = new Map<
-  string,
-  {
-    entries: {[key: string]: string | number | boolean};
-    schema: {type: TypeName; default: string | number | boolean};
-  }
->();
-
 export default async function Scrapiloo<
   D extends keyof ScrapilooDatasetMap,
   B extends BaseEntry = BaseEntry,
   T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]
 >(config: {dataset: D; endpoint: string; prototype: {new (): B}}) {
-  const apiOutput = await axios.get(
-    `${config.endpoint}?dataset=${config.dataset}`
-  );
-  const entries: {[key: string]: string | number | boolean} =
-    apiOutput.data.data;
+  const response = await fetch(`${config.endpoint}?dataset=${config.dataset}`);
+  const apiOutput = (await response.json()) as {
+    success: boolean;
+    schema: {
+      [key: string]: {type: TypeName; default: string | number | boolean};
+    };
+    data: {[key: string]: string | number | boolean};
+  };
+
+  const entries: {[key: string]: string | number | boolean} = apiOutput.data;
   const schema: {
     [key: string]: {type: TypeName; default: string | number | boolean};
-  } = apiOutput.data.schema;
+  } = apiOutput.schema;
 
   function all(): (T & B)[] {
     return Array.from(
