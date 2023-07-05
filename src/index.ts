@@ -33,8 +33,6 @@ export * from "./URLTypeImpl";
 export * from "./UnitType";
 export * from "./UnitTypeImpl";
 
-import fetch from "node-fetch";
-
 import {BooleanTypeImpl} from "./BooleanTypeImpl";
 import {CurrencyTypeImpl} from "./CurrencyTypeImpl";
 import {DateTypeImpl} from "./DateTypeImpl";
