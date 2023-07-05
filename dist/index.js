@@ -33,9 +33,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseEntry = exports.data = void 0;
 __exportStar(require("./BooleanType"), exports);
@@ -60,7 +57,6 @@ __exportStar(require("./URLType"), exports);
 __exportStar(require("./URLTypeImpl"), exports);
 __exportStar(require("./UnitType"), exports);
 __exportStar(require("./UnitTypeImpl"), exports);
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const BooleanTypeImpl_1 = require("./BooleanTypeImpl");
 const CurrencyTypeImpl_1 = require("./CurrencyTypeImpl");
 const DateTypeImpl_1 = require("./DateTypeImpl");
@@ -94,7 +90,7 @@ class BaseEntry {
 exports.BaseEntry = BaseEntry;
 function Scrapiloo(config) {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield (0, node_fetch_1.default)(`${config.endpoint}?dataset=${config.dataset}`);
+        const response = yield fetch(`${config.endpoint}?dataset=${config.dataset}`);
         const apiOutput = (yield response.json());
         const entries = apiOutput.data;
         const schema = apiOutput.schema;

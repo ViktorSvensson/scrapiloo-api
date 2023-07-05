@@ -20,7 +20,8 @@
     "build:watch": "tsc -w",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src*/**/*.ts --fix",
-    "lint:setup": "yarn add --dev eslint && eslint --init"
+    "lint:setup": "yarn add --dev eslint && eslint --init",
+    "publish:patch": "yarn build && git add -A && git commit -m \"patch\" && npm publish --access public"
   },
   "author": {
     "name": "Carl Viktor Svensson",
