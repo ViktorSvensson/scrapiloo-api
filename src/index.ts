@@ -32,6 +32,7 @@ export * from "./URLType";
 export * from "./URLTypeImpl";
 export * from "./UnitType";
 export * from "./UnitTypeImpl";
+export * from "./scrapiloo-loans";
 
 import {BooleanTypeImpl} from "./BooleanTypeImpl";
 import {CurrencyTypeImpl} from "./CurrencyTypeImpl";
@@ -86,6 +87,12 @@ export interface DataTypeMap {
   date: DateType;
 }
 
+/**
+ * Creates a DataType instance.
+ * @param value Value
+ * @param type Type name
+ * @returns
+ */
 export function data<TN extends TypeName, T extends DataTypeMap[TN]["value"]>(
   value: T | DataType,
   type: TN
@@ -105,12 +112,41 @@ interface ScrapilooDatasetMap {
   loans: ScrapilooLoan;
 }
 
+/**
+ * Creates an API data source.
+ * @param config
+ * @returns
+ */
 export default async function Scrapiloo<
   D extends keyof ScrapilooDatasetMap,
   B extends BaseEntry = BaseEntry,
   T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]
->(config: {dataset: D; endpoint: string; prototype: {new (): B}}) {
-  const response = await fetch(`${config.endpoint}?dataset=${config.dataset}`);
+>(config: {
+  /**
+   * Dataset key.
+   */
+  dataset: D;
+
+  /**
+   * Implementation of the `fetch` API that should be used
+   * to make requests. Provide a specific function in order
+   * to intercept requests for caching purposes etc.
+   */
+  fetch?: typeof fetch;
+
+  /**
+   * API endpoint URL.
+   */
+  endpoint: string;
+
+  /**
+   * A class prototype that all attributes will be assigned
+   * to.
+   */
+  prototype: {new (): B};
+}) {
+  const $fetch = config?.fetch ?? fetch;
+  const response = await $fetch(`${config.endpoint}?dataset=${config.dataset}`);
   const apiOutput = (await response.json()) as {
     success: boolean;
     schema: {
@@ -124,6 +160,10 @@ export default async function Scrapiloo<
     [key: string]: {type: TypeName; default: string | number | boolean};
   } = apiOutput.schema;
 
+  /**
+   * Retrieves all entries
+   * @returns
+   */
   function all(): (T & B)[] {
     return Array.from(
       new Set(Object.keys(entries).map((key) => key.split(":")[0])).values()
@@ -143,6 +183,11 @@ export default async function Scrapiloo<
     return obj;
   }
 
+  /**
+   * Retrieves an entry with the specified `key`.
+   * @param key
+   * @returns
+   */
   function get(key: string): T & B {
     const res: any = new config.prototype();
     res.__key = entries[`${key}:__key`];

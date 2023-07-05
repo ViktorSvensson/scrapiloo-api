@@ -31,6 +31,7 @@ export * from "./URLType";
 export * from "./URLTypeImpl";
 export * from "./UnitType";
 export * from "./UnitTypeImpl";
+export * from "./scrapiloo-loans";
 import { BooleanType, CurrencyType, DateType, FloatType, ImageType, IntegerType, StringType, TimeType, URLType, UnitType } from "./index";
 import { DataType, TypeName } from "./DataType";
 import { ScrapilooLoan } from "./scrapiloo-loans";
@@ -46,15 +47,42 @@ export interface DataTypeMap {
     currency: CurrencyType;
     date: DateType;
 }
+/**
+ * Creates a DataType instance.
+ * @param value Value
+ * @param type Type name
+ * @returns
+ */
 export declare function data<TN extends TypeName, T extends DataTypeMap[TN]["value"]>(value: T | DataType, type: TN): DataTypeMap[TN];
 export declare class BaseEntry {
 }
 interface ScrapilooDatasetMap {
     loans: ScrapilooLoan;
 }
+/**
+ * Creates an API data source.
+ * @param config
+ * @returns
+ */
 export default function Scrapiloo<D extends keyof ScrapilooDatasetMap, B extends BaseEntry = BaseEntry, T extends ScrapilooDatasetMap[D] = ScrapilooDatasetMap[D]>(config: {
+    /**
+     * Dataset key.
+     */
     dataset: D;
+    /**
+     * Implementation of the `fetch` API that should be used
+     * to make requests. Provide a specific function in order
+     * to intercept requests for caching purposes etc.
+     */
+    fetch?: typeof fetch;
+    /**
+     * API endpoint URL.
+     */
     endpoint: string;
+    /**
+     * A class prototype that all attributes will be assigned
+     * to.
+     */
     prototype: {
         new (): B;
     };

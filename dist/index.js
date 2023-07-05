@@ -57,6 +57,7 @@ __exportStar(require("./URLType"), exports);
 __exportStar(require("./URLTypeImpl"), exports);
 __exportStar(require("./UnitType"), exports);
 __exportStar(require("./UnitTypeImpl"), exports);
+__exportStar(require("./scrapiloo-loans"), exports);
 const BooleanTypeImpl_1 = require("./BooleanTypeImpl");
 const CurrencyTypeImpl_1 = require("./CurrencyTypeImpl");
 const DateTypeImpl_1 = require("./DateTypeImpl");
@@ -80,6 +81,12 @@ const DataTypeConstructorMap = {
     currency: CurrencyTypeImpl_1.CurrencyTypeImpl,
     date: DateTypeImpl_1.DateTypeImpl,
 };
+/**
+ * Creates a DataType instance.
+ * @param value Value
+ * @param type Type name
+ * @returns
+ */
 function data(value, type) {
     const constr = DataTypeConstructorMap[type];
     return new constr(value instanceof DataTypeImpl_1.DataTypeImpl ? value.valueOf() : value, type);
@@ -88,12 +95,23 @@ exports.data = data;
 class BaseEntry {
 }
 exports.BaseEntry = BaseEntry;
+/**
+ * Creates an API data source.
+ * @param config
+ * @returns
+ */
 function Scrapiloo(config) {
+    var _a;
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch(`${config.endpoint}?dataset=${config.dataset}`);
+        const $fetch = (_a = config === null || config === void 0 ? void 0 : config.fetch) !== null && _a !== void 0 ? _a : fetch;
+        const response = yield $fetch(`${config.endpoint}?dataset=${config.dataset}`);
         const apiOutput = (yield response.json());
         const entries = apiOutput.data;
         const schema = apiOutput.schema;
+        /**
+         * Retrieves all entries
+         * @returns
+         */
         function all() {
             return Array.from(new Set(Object.keys(entries).map((key) => key.split(":")[0])).values()).map((key) => {
                 return get(key);
@@ -110,6 +128,11 @@ function Scrapiloo(config) {
             target[sub[sub.length - 1]] = value;
             return obj;
         }
+        /**
+         * Retrieves an entry with the specified `key`.
+         * @param key
+         * @returns
+         */
         function get(key) {
             const res = new config.prototype();
             res.__key = entries[`${key}:__key`];
