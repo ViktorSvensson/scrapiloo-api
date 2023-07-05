@@ -21,7 +21,7 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src*/**/*.ts --fix",
     "lint:setup": "yarn add --dev eslint && eslint --init",
-    "build:patch": "yarn build && git add -A && git commit -m \"patch\""
+    "build:patch": "yarn build && git add -A && git commit -m \"patch\" && npm version patch"
   },
   "author": {
     "name": "Carl Viktor Svensson",
