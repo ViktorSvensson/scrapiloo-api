@@ -1,7 +1,7 @@
 {
   "name": "@scrapiloo/api",
   "version": "0.0.6",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "private": false,
   "prettier": {
     "singleQuote": false,
