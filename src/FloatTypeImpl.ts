@@ -10,7 +10,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 
-import assert from "node:assert";
 import {
   DataTypeImpl,
   FloatType,
@@ -92,11 +91,10 @@ export class FloatTypeImpl
     originalInterval: UnitType | UnitName,
     targetInterval: UnitName
   ): FloatType {
-    assert.ok(
-      originalInterval,
-      `Invalid originalInterval "${originalInterval}"`
-    );
-    assert.ok(targetInterval, `Invalid targetInterval "${targetInterval}"`);
+    if (!originalInterval)
+      throw new Error(`Invalid originalInterval "${originalInterval}"`);
+    if (!targetInterval)
+      throw new Error(`Invalid targetInterval "${targetInterval}"`);
 
     originalInterval =
       originalInterval instanceof UnitTypeImpl

@@ -10,12 +10,8 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FloatTypeImpl = void 0;
-const node_assert_1 = __importDefault(require("node:assert"));
 const _1 = require(".");
 class FloatTypeImpl extends _1.DataTypeImpl {
     constructor() {
@@ -78,8 +74,10 @@ class FloatTypeImpl extends _1.DataTypeImpl {
             .setConfig({ unit: (0, _1.data)(toUnit, "unit") });
     }
     changeInterval(originalInterval, targetInterval) {
-        node_assert_1.default.ok(originalInterval, `Invalid originalInterval "${originalInterval}"`);
-        node_assert_1.default.ok(targetInterval, `Invalid targetInterval "${targetInterval}"`);
+        if (!originalInterval)
+            throw new Error(`Invalid originalInterval "${originalInterval}"`);
+        if (!targetInterval)
+            throw new Error(`Invalid targetInterval "${targetInterval}"`);
         originalInterval =
             originalInterval instanceof _1.UnitTypeImpl
                 ? originalInterval
