@@ -6,6 +6,7 @@ export class StringTypeImpl
   implements StringType
 {
   pretty(): string {
+    if (this.isNull()) return "–";
     return this.valueOf();
   }
   isNull(): boolean {

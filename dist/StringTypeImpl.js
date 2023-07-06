@@ -4,6 +4,8 @@ exports.StringTypeImpl = void 0;
 const DataTypeImpl_1 = require("./DataTypeImpl");
 class StringTypeImpl extends DataTypeImpl_1.DataTypeImpl {
     pretty() {
+        if (this.isNull())
+            return "–";
         return this.valueOf();
     }
     isNull() {
