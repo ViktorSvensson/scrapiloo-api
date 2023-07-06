@@ -4,4 +4,5 @@ export declare class TimeTypeImpl extends DataTypeImpl<string, "time"> implement
     getHour(): number;
     getMinute(): number;
     isNull(): boolean;
+    pretty(): string;
 }

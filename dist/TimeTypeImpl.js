@@ -12,6 +12,9 @@ class TimeTypeImpl extends DataTypeImpl_1.DataTypeImpl {
     isNull() {
         return typeof this.value !== "string" || this.value.length === 0;
     }
+    pretty() {
+        return this.value;
+    }
 }
 exports.TimeTypeImpl = TimeTypeImpl;
 //# sourceMappingURL=TimeTypeImpl.js.map
