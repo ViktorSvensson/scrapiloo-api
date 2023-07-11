@@ -14,6 +14,7 @@ import {
   DataTypeImpl,
   FloatType,
   FloatTypeConfig,
+  IntegerType,
   UnitName,
   UnitType,
   UnitTypeImpl,
@@ -32,6 +33,23 @@ export class FloatTypeImpl
     displayUnit: true,
     displayInterval: false,
   };
+
+  mul(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() * x.valueOf(), this.type) as this;
+  }
+  div(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() / x.valueOf(), this.type) as this;
+  }
+  add(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() + x.valueOf(), this.type) as this;
+  }
+  sub(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() - x.valueOf(), this.type) as this;
+  }
 
   setConfig(config: Partial<FloatTypeConfig>): this {
     if ("unit" in config) {

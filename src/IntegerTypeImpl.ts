@@ -1,4 +1,4 @@
-import {data} from ".";
+import {FloatType, data} from ".";
 import {DataTypeImpl} from "./DataTypeImpl";
 import {IntegerType, IntegerTypeConfig} from "./IntegerType";
 import {UnitName, UnitType} from "./UnitType";
@@ -8,6 +8,22 @@ export class IntegerTypeImpl
   extends DataTypeImpl<number, "integer", IntegerTypeConfig>
   implements IntegerType
 {
+  mul(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() * x.valueOf(), this.type) as this;
+  }
+  div(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() / x.valueOf(), this.type) as this;
+  }
+  add(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() + x.valueOf(), this.type) as this;
+  }
+  sub(x: FloatType | IntegerType): this {
+    if (this.isNull() || x.isNull()) return data(null, this.type) as this;
+    return data(this.valueOf() - x.valueOf(), this.type) as this;
+  }
   protected defaultConfig: IntegerTypeConfig = {
     decimals: 0,
     unit: null,

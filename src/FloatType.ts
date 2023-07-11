@@ -11,10 +11,13 @@
  */
 
 import {DataType, IntegerTypeConfig, UnitName, UnitType} from ".";
+import {NumericType} from "./NumericType";
 
 export interface FloatTypeConfig extends IntegerTypeConfig {}
 
-export interface FloatType extends DataType<number, FloatTypeConfig> {
+export interface FloatType
+  extends DataType<number, FloatTypeConfig>,
+    NumericType {
   readonly type: "float";
   readonly value: number;
   readonly config: FloatTypeConfig;
