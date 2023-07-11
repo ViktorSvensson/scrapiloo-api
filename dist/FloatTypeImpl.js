@@ -25,6 +25,26 @@ class FloatTypeImpl extends _1.DataTypeImpl {
             displayInterval: false,
         };
     }
+    mul(x) {
+        if (this.isNull() || x.isNull())
+            return (0, _1.data)(null, this.type);
+        return (0, _1.data)(this.valueOf() * x.valueOf(), this.type);
+    }
+    div(x) {
+        if (this.isNull() || x.isNull())
+            return (0, _1.data)(null, this.type);
+        return (0, _1.data)(this.valueOf() / x.valueOf(), this.type);
+    }
+    add(x) {
+        if (this.isNull() || x.isNull())
+            return (0, _1.data)(null, this.type);
+        return (0, _1.data)(this.valueOf() + x.valueOf(), this.type);
+    }
+    sub(x) {
+        if (this.isNull() || x.isNull())
+            return (0, _1.data)(null, this.type);
+        return (0, _1.data)(this.valueOf() - x.valueOf(), this.type);
+    }
     setConfig(config) {
         if ("unit" in config) {
             config.unit =

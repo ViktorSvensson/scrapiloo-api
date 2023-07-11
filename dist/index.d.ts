@@ -23,6 +23,7 @@ export * from "./ImageType";
 export * from "./ImageTypeImpl";
 export * from "./IntegerType";
 export * from "./IntegerTypeImpl";
+export * from "./NumericType";
 export * from "./StringType";
 export * from "./StringTypeImpl";
 export * from "./TimeType";

@@ -49,6 +49,7 @@ __exportStar(require("./ImageType"), exports);
 __exportStar(require("./ImageTypeImpl"), exports);
 __exportStar(require("./IntegerType"), exports);
 __exportStar(require("./IntegerTypeImpl"), exports);
+__exportStar(require("./NumericType"), exports);
 __exportStar(require("./StringType"), exports);
 __exportStar(require("./StringTypeImpl"), exports);
 __exportStar(require("./TimeType"), exports);

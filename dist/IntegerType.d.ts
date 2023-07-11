@@ -1,5 +1,6 @@
 import { CurrencyType } from "./CurrencyType";
 import { DataType } from "./DataType";
+import { NumericType } from "./NumericType";
 import { UnitName, UnitType } from "./UnitType";
 export interface IntegerTypeConfig {
     /**
@@ -35,7 +36,7 @@ export interface IntegerTypeConfig {
      */
     displayInterval: boolean;
 }
-export interface IntegerType extends DataType<number> {
+export interface IntegerType extends DataType<number>, NumericType {
     readonly value: number;
     readonly type: "integer";
     readonly config: IntegerTypeConfig;

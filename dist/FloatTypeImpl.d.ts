@@ -9,9 +9,13 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
-import { DataTypeImpl, FloatType, FloatTypeConfig, UnitName, UnitType } from ".";
+import { DataTypeImpl, FloatType, FloatTypeConfig, IntegerType, UnitName, UnitType } from ".";
 export declare class FloatTypeImpl extends DataTypeImpl<number, "float", FloatTypeConfig> implements FloatType {
     protected defaultConfig: FloatTypeConfig;
+    mul(x: FloatType | IntegerType): this;
+    div(x: FloatType | IntegerType): this;
+    add(x: FloatType | IntegerType): this;
+    sub(x: FloatType | IntegerType): this;
     setConfig(config: Partial<FloatTypeConfig>): this;
     pretty(): string;
     isNull(): boolean;
