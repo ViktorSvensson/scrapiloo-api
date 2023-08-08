@@ -179,6 +179,10 @@ export interface ScrapilooLoan {
       readonly seb?: BooleanType;
       readonly swedbank?: BooleanType;
     };
+    /**
+     * Direct payout requires additional payment
+     */
+    readonly requires_payment?: BooleanType;
   };
   /**
    * Primary email address
@@ -550,6 +554,10 @@ export class ScrapilooLoanImpl {
       readonly seb?: BooleanType;
       readonly swedbank?: BooleanType;
     };
+    /**
+     * Direct payout requires additional payment
+     */
+    readonly requires_payment?: BooleanType;
   };
   /**
    * Primary email address
