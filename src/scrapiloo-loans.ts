@@ -1,5 +1,6 @@
 /**
  * @author     Carl Viktor Svensson
+ * @author     Kelsie Maria Enqvist
  * @license    Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,17 +12,14 @@
  */
 
 import {
-  FloatType,
-  UnitType,
   BooleanType,
-  IntegerType,
   CurrencyType,
+  FloatType,
+  IntegerType,
   StringType,
   TimeType,
-  ImageType,
-  DateType,
   URLType,
-  TypeName,
+  UnitType,
 } from ".";
 
 export interface ScrapilooLoan {
@@ -73,6 +71,7 @@ export interface ScrapilooLoan {
     readonly unit?: UnitType;
   };
   readonly annual_interest?: {
+    readonly interval?: UnitType;
     /**
      * Minimum annual interest rate
      */
@@ -85,22 +84,47 @@ export interface ScrapilooLoan {
   readonly connected_banks?: {
     readonly bank?: {
       readonly avida?: BooleanType;
-      readonly bank_norwegian?: BooleanType;
+      readonly banknorwegian?: BooleanType;
+      readonly banky?: BooleanType;
+      readonly bigbank?: BooleanType;
+      readonly brixo?: BooleanType;
       readonly brocc?: BooleanType;
+      readonly cashbuddy?: BooleanType;
+      readonly collector?: BooleanType;
       readonly coop?: BooleanType;
-      readonly ica_banken?: BooleanType;
-      readonly ikano_bank?: BooleanType;
-      readonly konsument_kredit?: BooleanType;
-      readonly lan_spar_bank?: BooleanType;
+      readonly credento?: BooleanType;
+      readonly facitbank?: BooleanType;
+      readonly ferratum?: BooleanType;
+      readonly goodcash?: BooleanType;
+      readonly icabanken?: BooleanType;
+      readonly ikanobank?: BooleanType;
+      readonly instabank?: BooleanType;
+      readonly konsumentkredit?: BooleanType;
+      readonly lansparbank?: BooleanType;
+      readonly leabank?: BooleanType;
+      readonly loanstep?: BooleanType;
       readonly lunar?: BooleanType;
-      readonly marginalen_bank?: BooleanType;
+      readonly marginalenbank?: BooleanType;
+      readonly moank?: BooleanType;
+      readonly moneygo?: BooleanType;
+      readonly morrow?: BooleanType;
       readonly nordax?: BooleanType;
+      readonly nordnet?: BooleanType;
+      readonly northmill?: BooleanType;
       readonly nstart?: BooleanType;
+      readonly primalcapital?: BooleanType;
       readonly remember?: BooleanType;
       readonly resurs?: BooleanType;
+      readonly risicum?: BooleanType;
       readonly santander?: BooleanType;
+      readonly seb?: BooleanType;
       readonly sevenday?: BooleanType;
-      readonly wastgota_finans?: BooleanType;
+      readonly sveabank?: BooleanType;
+      readonly tfbank?: BooleanType;
+      readonly thorn?: BooleanType;
+      readonly tryggkredit?: BooleanType;
+      readonly wasakredit?: BooleanType;
+      readonly wastgotafinans?: BooleanType;
     };
     /**
      * Number of connected banks
@@ -187,6 +211,10 @@ export interface ScrapilooLoan {
      */
     readonly min?: FloatType;
   };
+  /**
+   * Is high cost credit, according to Swedish definition
+   */
+  readonly is_high_cost_credit?: BooleanType;
   readonly late_payment_fee?: {
     /**
      * Late payment fee amount
@@ -414,6 +442,7 @@ export class ScrapilooLoanImpl {
     readonly unit?: UnitType;
   };
   readonly annual_interest?: {
+    readonly interval?: UnitType;
     /**
      * Minimum annual interest rate
      */
@@ -426,22 +455,47 @@ export class ScrapilooLoanImpl {
   readonly connected_banks?: {
     readonly bank?: {
       readonly avida?: BooleanType;
-      readonly bank_norwegian?: BooleanType;
+      readonly banknorwegian?: BooleanType;
+      readonly banky?: BooleanType;
+      readonly bigbank?: BooleanType;
+      readonly brixo?: BooleanType;
       readonly brocc?: BooleanType;
+      readonly cashbuddy?: BooleanType;
+      readonly collector?: BooleanType;
       readonly coop?: BooleanType;
-      readonly ica_banken?: BooleanType;
-      readonly ikano_bank?: BooleanType;
-      readonly konsument_kredit?: BooleanType;
-      readonly lan_spar_bank?: BooleanType;
+      readonly credento?: BooleanType;
+      readonly facitbank?: BooleanType;
+      readonly ferratum?: BooleanType;
+      readonly goodcash?: BooleanType;
+      readonly icabanken?: BooleanType;
+      readonly ikanobank?: BooleanType;
+      readonly instabank?: BooleanType;
+      readonly konsumentkredit?: BooleanType;
+      readonly lansparbank?: BooleanType;
+      readonly leabank?: BooleanType;
+      readonly loanstep?: BooleanType;
       readonly lunar?: BooleanType;
-      readonly marginalen_bank?: BooleanType;
+      readonly marginalenbank?: BooleanType;
+      readonly moank?: BooleanType;
+      readonly moneygo?: BooleanType;
+      readonly morrow?: BooleanType;
       readonly nordax?: BooleanType;
+      readonly nordnet?: BooleanType;
+      readonly northmill?: BooleanType;
       readonly nstart?: BooleanType;
+      readonly primalcapital?: BooleanType;
       readonly remember?: BooleanType;
       readonly resurs?: BooleanType;
+      readonly risicum?: BooleanType;
       readonly santander?: BooleanType;
+      readonly seb?: BooleanType;
       readonly sevenday?: BooleanType;
-      readonly wastgota_finans?: BooleanType;
+      readonly sveabank?: BooleanType;
+      readonly tfbank?: BooleanType;
+      readonly thorn?: BooleanType;
+      readonly tryggkredit?: BooleanType;
+      readonly wasakredit?: BooleanType;
+      readonly wastgotafinans?: BooleanType;
     };
     /**
      * Number of connected banks
@@ -528,6 +582,10 @@ export class ScrapilooLoanImpl {
      */
     readonly min?: FloatType;
   };
+  /**
+   * Is high cost credit, according to Swedish definition
+   */
+  readonly is_high_cost_credit?: BooleanType;
   readonly late_payment_fee?: {
     /**
      * Late payment fee amount
