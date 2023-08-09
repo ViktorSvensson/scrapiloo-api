@@ -395,6 +395,16 @@ export interface ScrapilooLoan {
     readonly active?: BooleanType;
     readonly main?: URLType;
   };
+  readonly withdrawal_fee?: {
+    /**
+     * Cost of money withdrawal
+     */
+    readonly amount?: FloatType;
+    /**
+     * Currency of withdrawal fee
+     */
+    readonly currency?: CurrencyType;
+  };
 }
 
 export class ScrapilooLoanImpl {
@@ -769,5 +779,15 @@ export class ScrapilooLoanImpl {
   readonly tracking?: {
     readonly active?: BooleanType;
     readonly main?: URLType;
+  };
+  readonly withdrawal_fee?: {
+    /**
+     * Cost of money withdrawal
+     */
+    readonly amount?: FloatType;
+    /**
+     * Currency of withdrawal fee
+     */
+    readonly currency?: CurrencyType;
   };
 }
