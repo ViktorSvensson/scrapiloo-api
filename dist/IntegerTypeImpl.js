@@ -66,6 +66,9 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
             .filter((str) => String(str !== null && str !== void 0 ? str : "").length > 0)
             .join(" ");
     }
+    valueOf() {
+        return Math.round(this.value);
+    }
     isNull() {
         return typeof this.valueOf() !== "number";
     }

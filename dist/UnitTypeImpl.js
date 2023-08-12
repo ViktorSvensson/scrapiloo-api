@@ -34,28 +34,48 @@ class UnitTypeImpl extends DataTypeImpl_1.DataTypeImpl {
 }
 exports.UnitTypeImpl = UnitTypeImpl;
 function unitConversion(from, to) {
-    const factors = {};
-    factors.second = {};
-    factors.second.second = 1;
-    factors.second.minute = 1 / 60;
-    factors.second.hour = 1 / 3600;
-    factors.second.day = 1 / (3600 * 24);
-    factors.second.week = 1 / (3600 * 24 * 7);
-    factors.second.month = 1 / (3600 * 24 * 30);
-    factors.second.year = 1 / (3600 * 24 * 365);
-    for (const f of ["minute", "hour", "day", "week", "month", "year"]) {
-        factors[f] = {};
-        factors[f][f] = 1;
-        factors[f].second = 1 / factors.second[f];
-        factors[f].minute = (1 / factors.second[f]) * 60;
-        factors[f].hour = (1 / factors.second[f]) * 3600;
-        factors[f].day = (1 / factors.second[f]) * 3600 * 24;
-        factors[f].week = (1 / factors.second[f]) * 3600 * 24 * 7;
-        factors[f].month = 1 / (factors.second[f] * 3600 * 24 * 30);
-        factors[f].year = 1 / (factors.second[f] * 3600 * 24 * 365);
+    if (from === to)
+        return 1;
+    if (from === "year") {
+        switch (to) {
+            case "month":
+                return 12;
+            case "day":
+                return 365;
+            case "week":
+                return 52;
+        }
     }
-    if (!(from in factors) || !(to in factors[from]))
-        throw new Error(`Can not make unit conversion from "${from}" to "${to}".`);
-    return factors[from][to];
+    if (from === "month") {
+        switch (to) {
+            case "year":
+                return 1 / 12;
+            case "day":
+                return 30.4;
+            case "week":
+                return 30.4 / 7;
+        }
+    }
+    if (from === "day") {
+        switch (to) {
+            case "year":
+                return 1 / 365;
+            case "month":
+                return 1 / 30.4;
+            case "week":
+                return 1 / 7;
+        }
+    }
+    if (from === "week") {
+        switch (to) {
+            case "year":
+                return 1 / 52;
+            case "month":
+                return 1 / (30.4 / 7);
+            case "day":
+                return 7;
+        }
+    }
+    throw new Error(`Conversions between "${from}" and "${to}" are not implemented`);
 }
 //# sourceMappingURL=UnitTypeImpl.js.map

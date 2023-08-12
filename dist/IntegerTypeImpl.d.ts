@@ -10,6 +10,7 @@ export declare class IntegerTypeImpl extends DataTypeImpl<number, "integer", Int
     protected defaultConfig: IntegerTypeConfig;
     setConfig(config: Partial<IntegerTypeConfig>): this;
     pretty(): string;
+    valueOf(): number;
     isNull(): boolean;
     convert(fromUnit: UnitType | UnitName, toUnit: UnitName): IntegerType;
     setFlexibleUnit(originalUnit: UnitType | UnitName, targetUnitOptions: UnitName[], smallestValue?: number): IntegerType;
