@@ -62,6 +62,11 @@ export class IntegerTypeImpl
       .filter((str) => String(str ?? "").length > 0)
       .join(" ");
   }
+
+  valueOf(): number {
+    return Math.round(this.value);
+  }
+
   isNull(): boolean {
     return typeof this.valueOf() !== "number";
   }

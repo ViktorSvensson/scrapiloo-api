@@ -17,7 +17,8 @@
     "strictFunctionTypes": true,
     "lib": ["ESNext", "DOM"],
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true
   },
   "include": ["src/**/*"]
 }
