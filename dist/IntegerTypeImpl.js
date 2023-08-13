@@ -95,17 +95,17 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
             .setConfig(this.config)
             .setConfig({ unit: (0, _1.data)(toUnit, "unit") });
     }
-    setFlexibleUnit(originalUnit, targetUnitOptions, smallestValue = 1) {
+    setFlexibleUnit(originalUnit, targetUnitOptions, smallestValue = 0.95) {
         if (this.isNull())
             return this;
         originalUnit = (0, _1.data)(originalUnit, "unit");
         let selectedValue = this.value;
         let selectedUnit = originalUnit.valueOf();
         for (const option of targetUnitOptions) {
-            const converted = Math.round(originalUnit.getConversionFactor(option) * this.value);
+            const converted = originalUnit.getConversionFactor(option) * this.value;
             if (converted >= smallestValue &&
                 (converted < selectedValue || selectedValue < smallestValue)) {
-                selectedValue = converted;
+                selectedValue = Math.round(converted);
                 selectedUnit = option;
             }
         }

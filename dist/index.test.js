@@ -36,6 +36,31 @@ describe("IntegerType: Convert", () => {
         expect(x.convert("month", "week").valueOf()).toEqual(52);
     });
 });
+describe("IntegerType: Flexible unit", () => {
+    test("Can set flexible unit", () => {
+        expect((0, _1.data)(6, "integer")
+            .setFlexibleUnit("month", ["day", "month", "year"])
+            .pretty()).toEqual("6 mån");
+        expect((0, _1.data)(13, "integer")
+            .setFlexibleUnit("month", ["day", "month", "year"])
+            .pretty()).toEqual("1 år");
+        expect((0, _1.data)(2, "integer")
+            .setFlexibleUnit("year", ["day", "month", "year"])
+            .pretty()).toEqual("2 år");
+        expect((0, _1.data)(13.4, "integer")
+            .setFlexibleUnit("year", ["day", "month", "year"])
+            .pretty()).toEqual("13 år");
+        expect((0, _1.data)(13.5, "integer")
+            .setFlexibleUnit("year", ["day", "month", "year"])
+            .pretty()).toEqual("14 år");
+        expect((0, _1.data)(364, "integer")
+            .setFlexibleUnit("day", ["day", "month", "year"])
+            .pretty()).toEqual("1 år");
+        expect((0, _1.data)(370, "integer")
+            .setFlexibleUnit("day", ["day", "month", "year"])
+            .pretty()).toEqual("1 år");
+    });
+});
 describe("IntegerType: Interval", () => {
     test("Can change interval from year", () => {
         const x = (0, _1.data)(10000, "integer").setConfig({ unit: "year" });

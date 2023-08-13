@@ -108,21 +108,19 @@ export class IntegerTypeImpl
   setFlexibleUnit(
     originalUnit: UnitType | UnitName,
     targetUnitOptions: UnitName[],
-    smallestValue: number = 1
+    smallestValue: number = 0.95
   ): IntegerType {
     if (this.isNull()) return this as this & IntegerType;
     originalUnit = data(originalUnit as UnitName, "unit");
     let selectedValue = this.value;
     let selectedUnit = originalUnit.valueOf();
     for (const option of targetUnitOptions) {
-      const converted = Math.round(
-        originalUnit.getConversionFactor(option) * this.value
-      );
+      const converted = originalUnit.getConversionFactor(option) * this.value;
       if (
         converted >= smallestValue &&
         (converted < selectedValue || selectedValue < smallestValue)
       ) {
-        selectedValue = converted;
+        selectedValue = Math.round(converted);
         selectedUnit = option;
       }
     }

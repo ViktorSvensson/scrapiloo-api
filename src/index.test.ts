@@ -39,6 +39,46 @@ describe("IntegerType: Convert", () => {
   });
 });
 
+describe("IntegerType: Flexible unit", () => {
+  test("Can set flexible unit", () => {
+    expect(
+      data(6, "integer")
+        .setFlexibleUnit("month", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("6 mån");
+    expect(
+      data(13, "integer")
+        .setFlexibleUnit("month", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("1 år");
+    expect(
+      data(2, "integer")
+        .setFlexibleUnit("year", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("2 år");
+    expect(
+      data(13.4, "integer")
+        .setFlexibleUnit("year", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("13 år");
+    expect(
+      data(13.5, "integer")
+        .setFlexibleUnit("year", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("14 år");
+    expect(
+      data(364, "integer")
+        .setFlexibleUnit("day", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("1 år");
+    expect(
+      data(370, "integer")
+        .setFlexibleUnit("day", ["day", "month", "year"])
+        .pretty()
+    ).toEqual("1 år");
+  });
+});
+
 describe("IntegerType: Interval", () => {
   test("Can change interval from year", () => {
     const x = data(10000, "integer").setConfig({unit: "year"});
