@@ -111,10 +111,7 @@ export class IntegerTypeImpl
     smallestValue: number = 1
   ): IntegerType {
     if (this.isNull()) return this as this & IntegerType;
-    originalUnit =
-      originalUnit instanceof UnitTypeImpl
-        ? originalUnit
-        : data(originalUnit as UnitName, "unit");
+    originalUnit = data(originalUnit as UnitName, "unit");
     let selectedValue = this.value;
     let selectedUnit = originalUnit.valueOf();
     for (const option of targetUnitOptions) {
@@ -145,7 +142,7 @@ export class IntegerTypeImpl
     return data(
       this.isNull()
         ? null
-        : this.valueOf() *
+        : this.value *
             (1 / originalInterval.getConversionFactor(targetInterval)),
       this.type
     ).setConfig({...this.config, interval: data(targetInterval, "unit")});
