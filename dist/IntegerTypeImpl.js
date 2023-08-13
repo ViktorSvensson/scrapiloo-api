@@ -98,10 +98,7 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
     setFlexibleUnit(originalUnit, targetUnitOptions, smallestValue = 1) {
         if (this.isNull())
             return this;
-        originalUnit =
-            originalUnit instanceof UnitTypeImpl_1.UnitTypeImpl
-                ? originalUnit
-                : (0, _1.data)(originalUnit, "unit");
+        originalUnit = (0, _1.data)(originalUnit, "unit");
         let selectedValue = this.value;
         let selectedUnit = originalUnit.valueOf();
         for (const option of targetUnitOptions) {
@@ -123,7 +120,7 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
                 : (0, _1.data)(originalInterval, "unit");
         return (0, _1.data)(this.isNull()
             ? null
-            : this.valueOf() *
+            : this.value *
                 (1 / originalInterval.getConversionFactor(targetInterval)), this.type).setConfig(Object.assign(Object.assign({}, this.config), { interval: (0, _1.data)(targetInterval, "unit") }));
     }
 }
