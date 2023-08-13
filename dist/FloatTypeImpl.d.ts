@@ -12,10 +12,12 @@
 import { DataTypeImpl, FloatType, FloatTypeConfig, IntegerType, UnitName, UnitType } from ".";
 export declare class FloatTypeImpl extends DataTypeImpl<number, "float", FloatTypeConfig> implements FloatType {
     protected defaultConfig: FloatTypeConfig;
-    mul(x: FloatType | IntegerType): this;
-    div(x: FloatType | IntegerType): this;
-    add(x: FloatType | IntegerType): this;
-    sub(x: FloatType | IntegerType): this;
+    mul(x: FloatType | IntegerType | number): this & FloatType;
+    div(x: FloatType | IntegerType | number): this & FloatType;
+    add(x: FloatType | IntegerType | number): this & FloatType;
+    sub(x: FloatType | IntegerType | number): this & FloatType;
+    greaterThan(x: number | IntegerType | FloatType): boolean;
+    lessThan(x: number | IntegerType | FloatType): boolean;
     setConfig(config: Partial<FloatTypeConfig>): this;
     pretty(): string;
     isNull(): boolean;

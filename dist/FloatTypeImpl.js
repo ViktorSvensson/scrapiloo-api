@@ -26,24 +26,36 @@ class FloatTypeImpl extends _1.DataTypeImpl {
         };
     }
     mul(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() * x.valueOf(), this.type);
+        return (0, _1.data)(this.value * x.value, this.type);
     }
     div(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() / x.valueOf(), this.type);
+        return (0, _1.data)(this.value / x.value, this.type);
     }
     add(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() + x.valueOf(), this.type);
+        return (0, _1.data)(this.value + x.value, this.type);
     }
     sub(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() - x.valueOf(), this.type);
+        return (0, _1.data)(this.value - x.value, this.type);
+    }
+    greaterThan(x) {
+        x = (0, _1.data)(x, "float");
+        return this.value > x.value;
+    }
+    lessThan(x) {
+        x = (0, _1.data)(x, "float");
+        return this.value < x.value;
     }
     setConfig(config) {
         if ("unit" in config) {

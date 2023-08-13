@@ -2,23 +2,33 @@ import { IntegerType } from ".";
 import { FloatType } from "./FloatType";
 export interface NumericType {
     /**
-     * Multiplies two numeric types.
+     * Multiplies by x.
      * @param x
      */
-    mul(x: IntegerType | FloatType): this;
+    mul(x: IntegerType | FloatType | number): this;
     /**
-     * Divides by another numeric type.
+     * Divides by x.
      * @param x
      */
-    div(x: IntegerType | FloatType): this;
+    div(x: IntegerType | FloatType | number): this;
     /**
-     * Adds another numeric type.
+     * Adds x.
      * @param x
      */
-    add(x: IntegerType | FloatType): this;
+    add(x: IntegerType | FloatType | number): this;
     /**
-     * Subtracts another numeric type.
+     * Subtracts x.
      * @param x
      */
-    sub(x: IntegerType | FloatType): this;
+    sub(x: IntegerType | FloatType | number): this;
+    /**
+     * Checks if value is greater than x.
+     * @param x
+     */
+    greaterThan(x: IntegerType | FloatType | number): boolean;
+    /**
+     * Checks if value is less than x.
+     * @param x
+     */
+    lessThan(x: IntegerType | FloatType | number): boolean;
 }

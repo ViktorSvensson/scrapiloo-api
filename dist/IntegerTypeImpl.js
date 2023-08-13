@@ -17,24 +17,36 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
         };
     }
     mul(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() * x.valueOf(), this.type);
+        return (0, _1.data)(this.value * x.value, this.type);
     }
     div(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() / x.valueOf(), this.type);
+        return (0, _1.data)(this.value / x.value, this.type);
     }
     add(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() + x.valueOf(), this.type);
+        return (0, _1.data)(this.value + x.value, this.type);
     }
     sub(x) {
+        x = (0, _1.data)(x, "float");
         if (this.isNull() || x.isNull())
             return (0, _1.data)(null, this.type);
-        return (0, _1.data)(this.valueOf() - x.valueOf(), this.type);
+        return (0, _1.data)(this.value - x.value, this.type);
+    }
+    greaterThan(x) {
+        x = (0, _1.data)(x, "float");
+        return this.value > x.value;
+    }
+    lessThan(x) {
+        x = (0, _1.data)(x, "float");
+        return this.value < x.value;
     }
     setConfig(config) {
         if ("unit" in config) {
@@ -63,7 +75,9 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
             !this.config.displayUnit ? "" : (_a = this.config.currency) !== null && _a !== void 0 ? _a : this.config.unit,
             !this.config.displayInterval ? "" : this.config.interval,
         ]
-            .filter((str) => String(str !== null && str !== void 0 ? str : "").length > 0)
+            .filter((str) => str !== null &&
+            typeof str !== undefined &&
+            String(str !== null && str !== void 0 ? str : "").length > 0)
             .join(" ");
     }
     valueOf() {

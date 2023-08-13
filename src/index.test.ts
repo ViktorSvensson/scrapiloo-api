@@ -86,3 +86,125 @@ describe("FloatType: Convert", () => {
     expect(x.convert("month", "week").valueOf()).toBeCloseTo(52.1142);
   });
 });
+
+describe("Performs math operations", () => {
+  test("Can multiply", () => {
+    expect(data(100, "float").mul(data(10, "float")).valueOf()).toBeCloseTo(
+      1000
+    );
+    expect(data(120, "integer").mul(data(5, "integer")).valueOf()).toBeCloseTo(
+      600
+    );
+    expect(data(100, "integer").mul(data(10, "float")).valueOf()).toBeCloseTo(
+      1000
+    );
+    expect(data(120, "float").mul(data(5, "integer")).valueOf()).toBeCloseTo(
+      600
+    );
+    expect(data(1.22, "float").mul(data(10, "float")).valueOf()).toBeCloseTo(
+      12.2
+    );
+    expect(
+      data(1.22, "integer").mul(data(10, "integer")).valueOf()
+    ).toBeCloseTo(12);
+    expect(data(1.22, "integer").mul(data(10, "float")).valueOf()).toBeCloseTo(
+      12
+    );
+    expect(data(1.22, "float").mul(data(10, "integer")).valueOf()).toBeCloseTo(
+      12.2
+    );
+  });
+  test("Can divide", () => {
+    expect(data(100, "float").div(data(10, "float")).valueOf()).toBeCloseTo(
+      100 / 10
+    );
+    expect(data(120, "integer").div(data(5, "integer")).valueOf()).toBeCloseTo(
+      120 / 5
+    );
+    expect(data(100, "integer").div(data(10, "float")).valueOf()).toBeCloseTo(
+      100 / 10
+    );
+    expect(data(120, "float").div(data(5, "integer")).valueOf()).toBeCloseTo(
+      120 / 5
+    );
+    expect(data(1.22, "float").div(data(10, "float")).valueOf()).toBeCloseTo(
+      1.22 / 10
+    );
+    expect(
+      data(1.22, "integer").div(data(10, "integer")).valueOf()
+    ).toBeCloseTo(0);
+    expect(data(1.22, "integer").div(data(10, "float")).valueOf()).toBeCloseTo(
+      0
+    );
+    expect(data(1.22, "float").div(data(10, "integer")).valueOf()).toBeCloseTo(
+      0.122
+    );
+  });
+  test("Can subtract", () => {
+    expect(data(100, "float").sub(data(10, "float")).valueOf()).toBeCloseTo(90);
+    expect(data(120, "integer").sub(data(5, "integer")).valueOf()).toBeCloseTo(
+      115
+    );
+    expect(data(100, "integer").sub(data(10, "float")).valueOf()).toBeCloseTo(
+      90
+    );
+    expect(data(120, "float").sub(data(5, "integer")).valueOf()).toBeCloseTo(
+      115
+    );
+    expect(data(11.22, "float").sub(data(10, "float")).valueOf()).toBeCloseTo(
+      1.22
+    );
+    expect(
+      data(11.22, "integer").sub(data(10, "integer")).valueOf()
+    ).toBeCloseTo(1);
+    expect(data(11.22, "integer").sub(data(10, "float")).valueOf()).toBeCloseTo(
+      1
+    );
+    expect(data(11.22, "float").sub(data(10, "integer")).valueOf()).toBeCloseTo(
+      1.22
+    );
+  });
+  test("Can add", () => {
+    expect(data(100, "float").add(data(10, "float")).valueOf()).toBeCloseTo(
+      110
+    );
+    expect(data(120, "integer").add(data(5, "integer")).valueOf()).toBeCloseTo(
+      125
+    );
+    expect(data(100, "integer").add(data(10, "float")).valueOf()).toBeCloseTo(
+      110
+    );
+    expect(data(120, "float").add(data(5, "integer")).valueOf()).toBeCloseTo(
+      125
+    );
+    expect(data(1.22, "float").add(data(10, "float")).valueOf()).toBeCloseTo(
+      11.22
+    );
+    expect(
+      data(1.22, "integer").add(data(10, "integer")).valueOf()
+    ).toBeCloseTo(11);
+    expect(data(1.22, "integer").add(data(10, "float")).valueOf()).toBeCloseTo(
+      11
+    );
+    expect(data(1.22, "float").add(data(10, "integer")).valueOf()).toBeCloseTo(
+      11.22
+    );
+  });
+});
+
+describe("Performs logical operations", () => {
+  test("Can use greaterThan", () => {
+    const x = data(3, "float").setConfig({unit: "year"});
+    expect(x.convert("year", "year").valueOf()).toBeCloseTo(3);
+    expect(x.convert("year", "month").valueOf()).toBeCloseTo(12 * 3);
+    expect(x.convert("year", "day").valueOf()).toBeCloseTo(365 * 3);
+    expect(x.convert("year", "week").valueOf()).toBeCloseTo(52 * 3);
+  });
+  test("Can use lessThan", () => {
+    const x = data(365, "float").setConfig({unit: "day"});
+    expect(x.convert("day", "day").valueOf()).toBeCloseTo(365);
+    expect(x.convert("day", "month").valueOf()).toBeCloseTo(12.006);
+    expect(x.convert("day", "year").valueOf()).toBeCloseTo(1);
+    expect(x.convert("day", "week").valueOf()).toBeCloseTo(52.1428);
+  });
+});

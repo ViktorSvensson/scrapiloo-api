@@ -8,22 +8,40 @@ export class IntegerTypeImpl
   extends DataTypeImpl<number, "integer", IntegerTypeConfig>
   implements IntegerType
 {
-  mul(x: FloatType | IntegerType): this {
+  mul(x: FloatType | IntegerType | number): this & IntegerType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() * x.valueOf(), this.type) as this;
+    return data(this.value * x.value, this.type) as this;
   }
-  div(x: FloatType | IntegerType): this {
+
+  div(x: FloatType | IntegerType | number): this & IntegerType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() / x.valueOf(), this.type) as this;
+    return data(this.value / x.value, this.type) as this;
   }
-  add(x: FloatType | IntegerType): this {
+
+  add(x: FloatType | IntegerType | number): this & IntegerType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() + x.valueOf(), this.type) as this;
+    return data(this.value + x.value, this.type) as this;
   }
-  sub(x: FloatType | IntegerType): this {
+
+  sub(x: FloatType | IntegerType | number): this & IntegerType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() - x.valueOf(), this.type) as this;
+    return data(this.value - x.value, this.type) as this;
   }
+
+  greaterThan(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value > x.value;
+  }
+
+  lessThan(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value < x.value;
+  }
+
   protected defaultConfig: IntegerTypeConfig = {
     decimals: 0,
     unit: null,
@@ -59,7 +77,12 @@ export class IntegerTypeImpl
       !this.config.displayUnit ? "" : this.config.currency ?? this.config.unit,
       !this.config.displayInterval ? "" : this.config.interval,
     ]
-      .filter((str) => String(str ?? "").length > 0)
+      .filter(
+        (str) =>
+          str !== null &&
+          typeof str !== undefined &&
+          String(str ?? "").length > 0
+      )
       .join(" ");
   }
 
@@ -89,7 +112,7 @@ export class IntegerTypeImpl
     targetUnitOptions: UnitName[],
     smallestValue: number = 1
   ): IntegerType {
-    if (this.isNull()) return this;
+    if (this.isNull()) return this as this & IntegerType;
     originalUnit =
       originalUnit instanceof UnitTypeImpl
         ? originalUnit

@@ -34,21 +34,38 @@ export class FloatTypeImpl
     displayInterval: false,
   };
 
-  mul(x: FloatType | IntegerType): this {
+  mul(x: FloatType | IntegerType | number): this & FloatType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() * x.valueOf(), this.type) as this;
+    return data(this.value * x.value, this.type) as this;
   }
-  div(x: FloatType | IntegerType): this {
+
+  div(x: FloatType | IntegerType | number): this & FloatType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() / x.valueOf(), this.type) as this;
+    return data(this.value / x.value, this.type) as this;
   }
-  add(x: FloatType | IntegerType): this {
+
+  add(x: FloatType | IntegerType | number): this & FloatType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() + x.valueOf(), this.type) as this;
+    return data(this.value + x.value, this.type) as this;
   }
-  sub(x: FloatType | IntegerType): this {
+
+  sub(x: FloatType | IntegerType | number): this & FloatType {
+    x = data(x, "float");
     if (this.isNull() || x.isNull()) return data(null, this.type) as this;
-    return data(this.valueOf() - x.valueOf(), this.type) as this;
+    return data(this.value - x.value, this.type) as this;
+  }
+
+  greaterThan(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value > x.value;
+  }
+
+  lessThan(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value < x.value;
   }
 
   setConfig(config: Partial<FloatTypeConfig>): this {
