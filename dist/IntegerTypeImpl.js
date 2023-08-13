@@ -91,9 +91,7 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
             fromUnit instanceof UnitTypeImpl_1.UnitTypeImpl
                 ? fromUnit
                 : (0, _1.data)(fromUnit, "unit");
-        return (0, _1.data)(this.isNull()
-            ? null
-            : this.valueOf() * fromUnit.getConversionFactor(toUnit), this.type)
+        return (0, _1.data)(this.isNull() ? null : this.value * fromUnit.getConversionFactor(toUnit), this.type)
             .setConfig(this.config)
             .setConfig({ unit: (0, _1.data)(toUnit, "unit") });
     }
@@ -104,10 +102,10 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
             originalUnit instanceof UnitTypeImpl_1.UnitTypeImpl
                 ? originalUnit
                 : (0, _1.data)(originalUnit, "unit");
-        let selectedValue = this.valueOf();
+        let selectedValue = this.value;
         let selectedUnit = originalUnit.valueOf();
         for (const option of targetUnitOptions) {
-            const converted = Math.round(originalUnit.getConversionFactor(option) * this.valueOf());
+            const converted = Math.round(originalUnit.getConversionFactor(option) * this.value);
             if (converted >= smallestValue &&
                 (converted < selectedValue || selectedValue < smallestValue)) {
                 selectedValue = converted;

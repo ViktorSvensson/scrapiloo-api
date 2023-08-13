@@ -99,9 +99,7 @@ export class IntegerTypeImpl
         ? fromUnit
         : data(fromUnit as UnitName, "unit");
     return data(
-      this.isNull()
-        ? null
-        : this.valueOf() * fromUnit.getConversionFactor(toUnit),
+      this.isNull() ? null : this.value * fromUnit.getConversionFactor(toUnit),
       this.type
     )
       .setConfig(this.config)
@@ -117,11 +115,11 @@ export class IntegerTypeImpl
       originalUnit instanceof UnitTypeImpl
         ? originalUnit
         : data(originalUnit as UnitName, "unit");
-    let selectedValue = this.valueOf();
+    let selectedValue = this.value;
     let selectedUnit = originalUnit.valueOf();
     for (const option of targetUnitOptions) {
       const converted = Math.round(
-        originalUnit.getConversionFactor(option) * this.valueOf()
+        originalUnit.getConversionFactor(option) * this.value
       );
       if (
         converted >= smallestValue &&
