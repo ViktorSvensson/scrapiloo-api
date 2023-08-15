@@ -6,11 +6,19 @@ export class TimeTypeImpl
   implements TimeType
 {
   getHour(): number {
-    throw new Error("Method not implemented.");
+    if (this.isNull()) return null;
+    const m = this.value.match(/^(?<h>\d{2}):(?<m>\d{2})/);
+    if (!m || !m.groups?.h || !m.groups?.m)
+      throw new Error(`Invalid time "${this.value}"`);
+    return Number(m.groups.h);
   }
 
   getMinute(): number {
-    throw new Error("Method not implemented.");
+    if (this.isNull()) return null;
+    const m = this.value.match(/^(?<h>\d{2}):(?<m>\d{2})/);
+    if (!m || !m.groups?.h || !m.groups?.m)
+      throw new Error(`Invalid time "${this.value}"`);
+    return Number(m.groups.m);
   }
 
   isNull(): boolean {
@@ -19,5 +27,22 @@ export class TimeTypeImpl
 
   pretty(): string {
     return this.value;
+  }
+
+  getDuration(end: TimeType): {
+    readonly minutes: number;
+    readonly hours: number;
+  } {
+    const startMin = this.getHour() * 60 + this.getMinute();
+    const endMin = end.getHour() * 60 + end.getMinute();
+    const durMin = endMin - startMin;
+    return {
+      get minutes() {
+        return durMin;
+      },
+      get hours() {
+        return durMin / 60;
+      },
+    };
   }
 }

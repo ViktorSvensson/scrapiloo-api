@@ -1,4 +1,3 @@
-import {data} from ".";
 /**
  * @author     Carl Viktor Svensson
  * @author     Kelsie Maria Enqvist
@@ -11,6 +10,8 @@ import {data} from ".";
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
+
+import {data} from ".";
 
 describe("IntegerType: Convert", () => {
   test("Can make unit conversions from year", () => {
@@ -232,19 +233,65 @@ describe("Performs math operations", () => {
   });
 });
 
-describe("Performs logical operations", () => {
+describe("FloatType: Performs logical operations", () => {
   test("Can use greaterThan", () => {
-    const x = data(3, "float").setConfig({unit: "year"});
-    expect(x.convert("year", "year").valueOf()).toBeCloseTo(3);
-    expect(x.convert("year", "month").valueOf()).toBeCloseTo(12 * 3);
-    expect(x.convert("year", "day").valueOf()).toBeCloseTo(365 * 3);
-    expect(x.convert("year", "week").valueOf()).toBeCloseTo(52 * 3);
+    expect(data(3, "float").greaterThan(4)).toEqual(false);
+    expect(data(3, "float").greaterThan(2)).toEqual(true);
+    expect(data(3, "float").greaterThan(3)).toEqual(false);
+    expect(data(3, "float").greaterThan(data(4, "integer"))).toEqual(false);
+    expect(data(3, "float").greaterThan(data(2, "float"))).toEqual(true);
+    expect(data(3, "float").greaterThan(data(3, "float"))).toEqual(false);
   });
   test("Can use lessThan", () => {
-    const x = data(365, "float").setConfig({unit: "day"});
-    expect(x.convert("day", "day").valueOf()).toBeCloseTo(365);
-    expect(x.convert("day", "month").valueOf()).toBeCloseTo(12.006);
-    expect(x.convert("day", "year").valueOf()).toBeCloseTo(1);
-    expect(x.convert("day", "week").valueOf()).toBeCloseTo(52.1428);
+    expect(data(3, "float").lessThan(4)).toEqual(true);
+    expect(data(3, "float").lessThan(2)).toEqual(false);
+    expect(data(3, "float").lessThan(3)).toEqual(false);
+    expect(data(3, "float").lessThan(data(4, "integer"))).toEqual(true);
+    expect(data(3, "float").lessThan(data(2, "float"))).toEqual(false);
+    expect(data(3, "float").lessThan(data(3, "float"))).toEqual(false);
+  });
+});
+
+describe("IntegerType: Performs logical operations", () => {
+  test("Can use greaterThan", () => {
+    expect(data(3, "integer").greaterThan(4)).toEqual(false);
+    expect(data(3, "integer").greaterThan(2)).toEqual(true);
+    expect(data(3, "integer").greaterThan(3)).toEqual(false);
+    expect(data(3, "integer").greaterThan(data(4, "integer"))).toEqual(false);
+    expect(data(3, "integer").greaterThan(data(2, "float"))).toEqual(true);
+    expect(data(3, "integer").greaterThan(data(3, "float"))).toEqual(false);
+  });
+  test("Can use lessThan", () => {
+    expect(data(3, "integer").lessThan(4)).toEqual(true);
+    expect(data(3, "integer").lessThan(2)).toEqual(false);
+    expect(data(3, "integer").lessThan(3)).toEqual(false);
+    expect(data(3, "integer").lessThan(data(4, "integer"))).toEqual(true);
+    expect(data(3, "integer").lessThan(data(2, "float"))).toEqual(false);
+    expect(data(3, "integer").lessThan(data(3, "float"))).toEqual(false);
+  });
+});
+
+describe("TimeType: Can calculate duration", () => {
+  test("Can calculate hours between two timestamps", () => {
+    expect(
+      data("12:00", "time").getDuration(data("14:00", "time")).hours
+    ).toEqual(2);
+    expect(
+      data("12:00", "time").getDuration(data("14:30", "time")).hours
+    ).toEqual(2.5);
+    expect(
+      data("00:00", "time").getDuration(data("09:45", "time")).hours
+    ).toEqual(9.75);
+  });
+  test("Can calculate minutes between two timestamps", () => {
+    expect(
+      data("12:00", "time").getDuration(data("14:00", "time")).minutes
+    ).toEqual(2 * 60);
+    expect(
+      data("12:00", "time").getDuration(data("14:30", "time")).minutes
+    ).toEqual(2 * 60 + 30);
+    expect(
+      data("00:00", "time").getDuration(data("09:45", "time")).minutes
+    ).toEqual(9 * 60 + 45);
   });
 });
