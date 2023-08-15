@@ -1,6 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const _1 = require(".");
 /**
  * @author     Carl Viktor Svensson
  * @author     Kelsie Maria Enqvist
@@ -13,6 +11,8 @@ const _1 = require(".");
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+const _1 = require(".");
 describe("IntegerType: Convert", () => {
     test("Can make unit conversions from year", () => {
         const x = (0, _1.data)(3, "integer").setConfig({ unit: "year" });
@@ -149,20 +149,52 @@ describe("Performs math operations", () => {
         expect((0, _1.data)(1.22, "float").add((0, _1.data)(10, "integer")).valueOf()).toBeCloseTo(11.22);
     });
 });
-describe("Performs logical operations", () => {
+describe("FloatType: Performs logical operations", () => {
     test("Can use greaterThan", () => {
-        const x = (0, _1.data)(3, "float").setConfig({ unit: "year" });
-        expect(x.convert("year", "year").valueOf()).toBeCloseTo(3);
-        expect(x.convert("year", "month").valueOf()).toBeCloseTo(12 * 3);
-        expect(x.convert("year", "day").valueOf()).toBeCloseTo(365 * 3);
-        expect(x.convert("year", "week").valueOf()).toBeCloseTo(52 * 3);
+        expect((0, _1.data)(3, "float").greaterThan(4)).toEqual(false);
+        expect((0, _1.data)(3, "float").greaterThan(2)).toEqual(true);
+        expect((0, _1.data)(3, "float").greaterThan(3)).toEqual(false);
+        expect((0, _1.data)(3, "float").greaterThan((0, _1.data)(4, "integer"))).toEqual(false);
+        expect((0, _1.data)(3, "float").greaterThan((0, _1.data)(2, "float"))).toEqual(true);
+        expect((0, _1.data)(3, "float").greaterThan((0, _1.data)(3, "float"))).toEqual(false);
     });
     test("Can use lessThan", () => {
-        const x = (0, _1.data)(365, "float").setConfig({ unit: "day" });
-        expect(x.convert("day", "day").valueOf()).toBeCloseTo(365);
-        expect(x.convert("day", "month").valueOf()).toBeCloseTo(12.006);
-        expect(x.convert("day", "year").valueOf()).toBeCloseTo(1);
-        expect(x.convert("day", "week").valueOf()).toBeCloseTo(52.1428);
+        expect((0, _1.data)(3, "float").lessThan(4)).toEqual(true);
+        expect((0, _1.data)(3, "float").lessThan(2)).toEqual(false);
+        expect((0, _1.data)(3, "float").lessThan(3)).toEqual(false);
+        expect((0, _1.data)(3, "float").lessThan((0, _1.data)(4, "integer"))).toEqual(true);
+        expect((0, _1.data)(3, "float").lessThan((0, _1.data)(2, "float"))).toEqual(false);
+        expect((0, _1.data)(3, "float").lessThan((0, _1.data)(3, "float"))).toEqual(false);
+    });
+});
+describe("IntegerType: Performs logical operations", () => {
+    test("Can use greaterThan", () => {
+        expect((0, _1.data)(3, "integer").greaterThan(4)).toEqual(false);
+        expect((0, _1.data)(3, "integer").greaterThan(2)).toEqual(true);
+        expect((0, _1.data)(3, "integer").greaterThan(3)).toEqual(false);
+        expect((0, _1.data)(3, "integer").greaterThan((0, _1.data)(4, "integer"))).toEqual(false);
+        expect((0, _1.data)(3, "integer").greaterThan((0, _1.data)(2, "float"))).toEqual(true);
+        expect((0, _1.data)(3, "integer").greaterThan((0, _1.data)(3, "float"))).toEqual(false);
+    });
+    test("Can use lessThan", () => {
+        expect((0, _1.data)(3, "integer").lessThan(4)).toEqual(true);
+        expect((0, _1.data)(3, "integer").lessThan(2)).toEqual(false);
+        expect((0, _1.data)(3, "integer").lessThan(3)).toEqual(false);
+        expect((0, _1.data)(3, "integer").lessThan((0, _1.data)(4, "integer"))).toEqual(true);
+        expect((0, _1.data)(3, "integer").lessThan((0, _1.data)(2, "float"))).toEqual(false);
+        expect((0, _1.data)(3, "integer").lessThan((0, _1.data)(3, "float"))).toEqual(false);
+    });
+});
+describe("TimeType: Can calculate duration", () => {
+    test("Can calculate hours between two timestamps", () => {
+        expect((0, _1.data)("12:00", "time").getDuration((0, _1.data)("14:00", "time")).hours).toEqual(2);
+        expect((0, _1.data)("12:00", "time").getDuration((0, _1.data)("14:30", "time")).hours).toEqual(2.5);
+        expect((0, _1.data)("00:00", "time").getDuration((0, _1.data)("09:45", "time")).hours).toEqual(9.75);
+    });
+    test("Can calculate minutes between two timestamps", () => {
+        expect((0, _1.data)("12:00", "time").getDuration((0, _1.data)("14:00", "time")).minutes).toEqual(2 * 60);
+        expect((0, _1.data)("12:00", "time").getDuration((0, _1.data)("14:30", "time")).minutes).toEqual(2 * 60 + 30);
+        expect((0, _1.data)("00:00", "time").getDuration((0, _1.data)("09:45", "time")).minutes).toEqual(9 * 60 + 45);
     });
 });
 //# sourceMappingURL=index.test.js.map
