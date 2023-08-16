@@ -84,14 +84,17 @@ export interface ScrapilooLoan {
             readonly credento?: BooleanType;
             readonly facitbank?: BooleanType;
             readonly ferratum?: BooleanType;
+            readonly gfmoney?: BooleanType;
             readonly goodcash?: BooleanType;
             readonly icabanken?: BooleanType;
             readonly ikanobank?: BooleanType;
             readonly instabank?: BooleanType;
+            readonly klicklan?: BooleanType;
             readonly konsumentkredit?: BooleanType;
             readonly lansparbank?: BooleanType;
             readonly leabank?: BooleanType;
             readonly loanstep?: BooleanType;
+            readonly lumify?: BooleanType;
             readonly lunar?: BooleanType;
             readonly marginalenbank?: BooleanType;
             readonly moank?: BooleanType;
@@ -105,6 +108,7 @@ export interface ScrapilooLoan {
             readonly remember?: BooleanType;
             readonly resurs?: BooleanType;
             readonly risicum?: BooleanType;
+            readonly saldo?: BooleanType;
             readonly santander?: BooleanType;
             readonly seb?: BooleanType;
             readonly sevenday?: BooleanType;
@@ -112,6 +116,7 @@ export interface ScrapilooLoan {
             readonly tfbank?: BooleanType;
             readonly thorn?: BooleanType;
             readonly tryggkredit?: BooleanType;
+            readonly viaconto?: BooleanType;
             readonly wasakredit?: BooleanType;
             readonly wastgotafinans?: BooleanType;
         };
@@ -189,6 +194,16 @@ export interface ScrapilooLoan {
     };
     readonly identification_method?: {
         readonly bankid?: BooleanType;
+    };
+    readonly interest_free?: {
+        /**
+         * Interest free time
+         */
+        readonly time?: IntegerType;
+        /**
+         * Unit of interest free time
+         */
+        readonly unit?: UnitType;
     };
     readonly interest?: {
         /**
@@ -394,6 +409,10 @@ export interface ScrapilooLoan {
          */
         readonly currency?: CurrencyType;
     };
+    /**
+     * Does not require any security
+     */
+    readonly without_security?: BooleanType;
 }
 export declare class ScrapilooLoanImpl {
     readonly __key?: string;
@@ -468,14 +487,17 @@ export declare class ScrapilooLoanImpl {
             readonly credento?: BooleanType;
             readonly facitbank?: BooleanType;
             readonly ferratum?: BooleanType;
+            readonly gfmoney?: BooleanType;
             readonly goodcash?: BooleanType;
             readonly icabanken?: BooleanType;
             readonly ikanobank?: BooleanType;
             readonly instabank?: BooleanType;
+            readonly klicklan?: BooleanType;
             readonly konsumentkredit?: BooleanType;
             readonly lansparbank?: BooleanType;
             readonly leabank?: BooleanType;
             readonly loanstep?: BooleanType;
+            readonly lumify?: BooleanType;
             readonly lunar?: BooleanType;
             readonly marginalenbank?: BooleanType;
             readonly moank?: BooleanType;
@@ -489,6 +511,7 @@ export declare class ScrapilooLoanImpl {
             readonly remember?: BooleanType;
             readonly resurs?: BooleanType;
             readonly risicum?: BooleanType;
+            readonly saldo?: BooleanType;
             readonly santander?: BooleanType;
             readonly seb?: BooleanType;
             readonly sevenday?: BooleanType;
@@ -496,6 +519,7 @@ export declare class ScrapilooLoanImpl {
             readonly tfbank?: BooleanType;
             readonly thorn?: BooleanType;
             readonly tryggkredit?: BooleanType;
+            readonly viaconto?: BooleanType;
             readonly wasakredit?: BooleanType;
             readonly wastgotafinans?: BooleanType;
         };
@@ -573,6 +597,16 @@ export declare class ScrapilooLoanImpl {
     };
     readonly identification_method?: {
         readonly bankid?: BooleanType;
+    };
+    readonly interest_free?: {
+        /**
+         * Interest free time
+         */
+        readonly time?: IntegerType;
+        /**
+         * Unit of interest free time
+         */
+        readonly unit?: UnitType;
     };
     readonly interest?: {
         /**
@@ -778,4 +812,8 @@ export declare class ScrapilooLoanImpl {
          */
         readonly currency?: CurrencyType;
     };
+    /**
+     * Does not require any security
+     */
+    readonly without_security?: BooleanType;
 }
