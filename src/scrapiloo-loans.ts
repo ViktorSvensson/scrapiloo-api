@@ -258,6 +258,20 @@ export interface ScrapilooLoan {
      */
     readonly rate?: FloatType;
   };
+  readonly loan_insurance?: {
+    /**
+     * Loan insurance is available
+     */
+    readonly available?: BooleanType;
+    /**
+     * Fee associated with loan insurance
+     */
+    readonly fee?: FloatType;
+    /**
+     * E.g. "monthly_payment" or "credit_amount"
+     */
+    readonly fee_basis?: StringType;
+  };
   readonly location?: {
     /**
      * Street address
@@ -295,6 +309,16 @@ export interface ScrapilooLoan {
     readonly percent?: FloatType;
   };
   readonly name?: StringType;
+  readonly offer_validity?: {
+    /**
+     * How long an offer is valid
+     */
+    readonly time?: IntegerType;
+    /**
+     * Unit of offer validity time
+     */
+    readonly unit?: UnitType;
+  };
   readonly opening_hours?: {
     readonly friday?: {
       readonly from?: TimeType;
@@ -662,6 +686,20 @@ export class ScrapilooLoanImpl {
      */
     readonly rate?: FloatType;
   };
+  readonly loan_insurance?: {
+    /**
+     * Loan insurance is available
+     */
+    readonly available?: BooleanType;
+    /**
+     * Fee associated with loan insurance
+     */
+    readonly fee?: FloatType;
+    /**
+     * E.g. "monthly_payment" or "credit_amount"
+     */
+    readonly fee_basis?: StringType;
+  };
   readonly location?: {
     /**
      * Street address
@@ -699,6 +737,16 @@ export class ScrapilooLoanImpl {
     readonly percent?: FloatType;
   };
   readonly name?: StringType;
+  readonly offer_validity?: {
+    /**
+     * How long an offer is valid
+     */
+    readonly time?: IntegerType;
+    /**
+     * Unit of offer validity time
+     */
+    readonly unit?: UnitType;
+  };
   readonly opening_hours?: {
     readonly friday?: {
       readonly from?: TimeType;
