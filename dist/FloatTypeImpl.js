@@ -73,7 +73,7 @@ class FloatTypeImpl extends _1.DataTypeImpl {
         return super.setConfig(config);
     }
     pretty() {
-        var _a;
+        var _a, _b, _c, _d;
         if (this.isNull())
             return "–";
         let val = Number(this.value).toLocaleString("sv-SE", {
@@ -81,12 +81,13 @@ class FloatTypeImpl extends _1.DataTypeImpl {
             maximumFractionDigits: this.config.decimals,
             style: "decimal",
         });
-        if (this.config.displayUnit) {
-            val = `${val} ${((_a = this.config.currency) === null || _a === void 0 ? void 0 : _a.valueOf())
+        if (this.config.displayUnit &&
+            (((_a = this.config.unit) === null || _a === void 0 ? void 0 : _a.valueOf()) || ((_b = this.config.currency) === null || _b === void 0 ? void 0 : _b.valueOf()))) {
+            val = `${val} ${((_c = this.config.currency) === null || _c === void 0 ? void 0 : _c.valueOf())
                 ? this.config.currency
                 : this.config.unit}`;
         }
-        if (this.config.displayInterval) {
+        if (this.config.displayInterval && ((_d = this.config.interval) === null || _d === void 0 ? void 0 : _d.valueOf())) {
             val = `${val}/${this.config.interval}`;
         }
         return val;

@@ -84,10 +84,27 @@ describe("IntegerType: Interval", () => {
         expect(x.changeInterval("month", "week").valueOf()).toEqual(2303);
     });
     test("Can pretty print with interval and currency", () => {
-        const x = (0, _1.data)(10000, "integer")
-            .changeInterval("year", "year")
-            .setConfig({ currency: "kr", displayInterval: true, displayUnit: true });
+        const x = (0, _1.data)(10000, "integer").setConfig({
+            currency: "kr",
+            displayInterval: true,
+            displayUnit: true,
+        });
         expect(x.changeInterval("month", "month").pretty()).toEqual(`10 000 kr/mån`);
+    });
+    test("Does not print unit when unit and currency is null", () => {
+        const x = (0, _1.data)(10000, "integer").setConfig({
+            displayInterval: true,
+            displayUnit: true,
+        });
+        expect(x.changeInterval("month", "month").pretty()).toEqual(`10 000/mån`);
+    });
+    test("Does not print interval when interval is null", () => {
+        const x = (0, _1.data)(10000, "integer").setConfig({
+            currency: "kr",
+            displayInterval: true,
+            displayUnit: true,
+        });
+        expect(x.pretty()).toEqual(`10 000 kr`);
     });
 });
 describe("FloatType: Convert", () => {

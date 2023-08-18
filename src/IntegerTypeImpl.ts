@@ -73,14 +73,17 @@ export class IntegerTypeImpl
       style: "decimal",
       maximumFractionDigits: this.config.decimals,
     });
-    if (this.config.displayUnit) {
+    if (
+      this.config.displayUnit &&
+      (this.config.unit?.valueOf() || this.config.currency?.valueOf())
+    ) {
       val = `${val} ${
         this.config.currency?.valueOf()
           ? this.config.currency
           : this.config.unit
       }`;
     }
-    if (this.config.displayInterval) {
+    if (this.config.displayInterval && this.config.interval?.valueOf()) {
       val = `${val}/${this.config.interval}`;
     }
     return val;
