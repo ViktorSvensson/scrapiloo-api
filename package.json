@@ -21,8 +21,8 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src*/**/*.ts --fix",
     "lint:setup": "yarn add --dev eslint && eslint --init",
-    "build:patch": "yarn build && git add -A && git commit -m \"version: patch\" && npm version patch",
-    "build:minor": "yarn build && git add -A && git commit -m \"version: minor\" && npm version minor"
+    "build:patch": "yarn test && yarn build && git add -A && git commit -m \"version: patch\" && npm version patch",
+    "build:minor": "yarn test && yarn build && git add -A && git commit -m \"version: minor\" && npm version minor"
   },
   "author": {
     "name": "Carl Viktor Svensson",

@@ -67,18 +67,19 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
         var _a;
         if (this.isNull())
             return "–";
-        return [
-            Math.round(this.value).toLocaleString("sv-SE", {
-                style: "decimal",
-                maximumFractionDigits: this.config.decimals,
-            }),
-            !this.config.displayUnit ? "" : (_a = this.config.currency) !== null && _a !== void 0 ? _a : this.config.unit,
-            !this.config.displayInterval ? "" : this.config.interval,
-        ]
-            .filter((str) => str !== null &&
-            typeof str !== undefined &&
-            String(str !== null && str !== void 0 ? str : "").length > 0)
-            .join(" ");
+        let val = Math.round(this.value).toLocaleString("sv-SE", {
+            style: "decimal",
+            maximumFractionDigits: this.config.decimals,
+        });
+        if (this.config.displayUnit) {
+            val = `${val} ${((_a = this.config.currency) === null || _a === void 0 ? void 0 : _a.valueOf())
+                ? this.config.currency
+                : this.config.unit}`;
+        }
+        if (this.config.displayInterval) {
+            val = `${val}/${this.config.interval}`;
+        }
+        return val;
     }
     valueOf() {
         return Math.round(this.value);
@@ -91,9 +92,7 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
             fromUnit instanceof UnitTypeImpl_1.UnitTypeImpl
                 ? fromUnit
                 : (0, _1.data)(fromUnit, "unit");
-        return (0, _1.data)(this.isNull() ? null : this.value * fromUnit.getConversionFactor(toUnit), this.type)
-            .setConfig(this.config)
-            .setConfig({ unit: (0, _1.data)(toUnit, "unit") });
+        return (0, _1.data)(this.isNull() ? null : this.value * fromUnit.getConversionFactor(toUnit), this.type).setConfig({ unit: (0, _1.data)(toUnit, "unit") });
     }
     setFlexibleUnit(originalUnit, targetUnitOptions, smallestValue = 0.95) {
         if (this.isNull())
@@ -109,8 +108,8 @@ class IntegerTypeImpl extends DataTypeImpl_1.DataTypeImpl {
                 selectedUnit = option;
             }
         }
-        return this.convert(originalUnit, selectedUnit)
-            .setConfig(this.config)
+        return this.clone()
+            .convert(originalUnit, selectedUnit)
             .setConfig({ unit: (0, _1.data)(selectedUnit, "unit") });
     }
     changeInterval(originalInterval, targetInterval) {

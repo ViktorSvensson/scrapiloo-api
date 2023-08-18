@@ -69,21 +69,21 @@ export class IntegerTypeImpl
 
   pretty() {
     if (this.isNull()) return "–";
-    return [
-      Math.round(this.value).toLocaleString("sv-SE", {
-        style: "decimal",
-        maximumFractionDigits: this.config.decimals,
-      }),
-      !this.config.displayUnit ? "" : this.config.currency ?? this.config.unit,
-      !this.config.displayInterval ? "" : this.config.interval,
-    ]
-      .filter(
-        (str) =>
-          str !== null &&
-          typeof str !== undefined &&
-          String(str ?? "").length > 0
-      )
-      .join(" ");
+    let val = Math.round(this.value).toLocaleString("sv-SE", {
+      style: "decimal",
+      maximumFractionDigits: this.config.decimals,
+    });
+    if (this.config.displayUnit) {
+      val = `${val} ${
+        this.config.currency?.valueOf()
+          ? this.config.currency
+          : this.config.unit
+      }`;
+    }
+    if (this.config.displayInterval) {
+      val = `${val}/${this.config.interval}`;
+    }
+    return val;
   }
 
   valueOf(): number {
@@ -101,9 +101,7 @@ export class IntegerTypeImpl
     return data(
       this.isNull() ? null : this.value * fromUnit.getConversionFactor(toUnit),
       this.type
-    )
-      .setConfig(this.config)
-      .setConfig({unit: data(toUnit, "unit")});
+    ).setConfig({unit: data(toUnit, "unit")});
   }
   setFlexibleUnit(
     originalUnit: UnitType | UnitName,
@@ -124,8 +122,8 @@ export class IntegerTypeImpl
         selectedUnit = option;
       }
     }
-    return this.convert(originalUnit, selectedUnit)
-      .setConfig(this.config)
+    return this.clone()
+      .convert(originalUnit, selectedUnit)
       .setConfig({unit: data(selectedUnit, "unit")});
   }
 

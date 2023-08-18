@@ -83,6 +83,12 @@ describe("IntegerType: Interval", () => {
         expect(x.changeInterval("month", "year").valueOf()).toEqual(120000);
         expect(x.changeInterval("month", "week").valueOf()).toEqual(2303);
     });
+    test("Can pretty print with interval and currency", () => {
+        const x = (0, _1.data)(10000, "integer")
+            .changeInterval("year", "year")
+            .setConfig({ currency: "kr", displayInterval: true, displayUnit: true });
+        expect(x.changeInterval("month", "month").pretty()).toEqual(`10 000 kr/mån`);
+    });
 });
 describe("FloatType: Convert", () => {
     test("Can make unit conversions from year", () => {
