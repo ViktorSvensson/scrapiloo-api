@@ -81,6 +81,20 @@ export interface ScrapilooLoan {
      */
     readonly min?: FloatType;
   };
+  readonly cancellation_period?: {
+    /**
+     * Agreement cancellation period
+     */
+    readonly time?: IntegerType;
+    /**
+     * Unit of cancellation period time
+     */
+    readonly unit?: UnitType;
+  };
+  /**
+   * Category
+   */
+  readonly category?: StringType;
   readonly connected_banks?: {
     readonly bank?: {
       readonly avida?: BooleanType;
@@ -93,6 +107,7 @@ export interface ScrapilooLoan {
       readonly collector?: BooleanType;
       readonly coop?: BooleanType;
       readonly credento?: BooleanType;
+      readonly credway?: BooleanType;
       readonly facitbank?: BooleanType;
       readonly ferratum?: BooleanType;
       readonly gfmoney?: BooleanType;
@@ -123,6 +138,7 @@ export interface ScrapilooLoan {
       readonly santander?: BooleanType;
       readonly seb?: BooleanType;
       readonly sevenday?: BooleanType;
+      readonly spendwise?: BooleanType;
       readonly sveabank?: BooleanType;
       readonly tfbank?: BooleanType;
       readonly thorn?: BooleanType;
@@ -353,6 +369,20 @@ export interface ScrapilooLoan {
    * Organization number
    */
   readonly organization_number?: StringType;
+  readonly payment_pause?: {
+    /**
+     * Payment pause interval, e.g. "1 month per _year_"
+     */
+    readonly interval?: UnitType;
+    /**
+     * Max payment pause time
+     */
+    readonly time?: IntegerType;
+    /**
+     * Unit of payment pause time
+     */
+    readonly unit?: UnitType;
+  };
   readonly payment_reminder_fee?: {
     /**
      * Payment reminder fee amount
@@ -509,6 +539,20 @@ export class ScrapilooLoanImpl {
      */
     readonly min?: FloatType;
   };
+  readonly cancellation_period?: {
+    /**
+     * Agreement cancellation period
+     */
+    readonly time?: IntegerType;
+    /**
+     * Unit of cancellation period time
+     */
+    readonly unit?: UnitType;
+  };
+  /**
+   * Category
+   */
+  readonly category?: StringType;
   readonly connected_banks?: {
     readonly bank?: {
       readonly avida?: BooleanType;
@@ -521,6 +565,7 @@ export class ScrapilooLoanImpl {
       readonly collector?: BooleanType;
       readonly coop?: BooleanType;
       readonly credento?: BooleanType;
+      readonly credway?: BooleanType;
       readonly facitbank?: BooleanType;
       readonly ferratum?: BooleanType;
       readonly gfmoney?: BooleanType;
@@ -551,6 +596,7 @@ export class ScrapilooLoanImpl {
       readonly santander?: BooleanType;
       readonly seb?: BooleanType;
       readonly sevenday?: BooleanType;
+      readonly spendwise?: BooleanType;
       readonly sveabank?: BooleanType;
       readonly tfbank?: BooleanType;
       readonly thorn?: BooleanType;
@@ -781,6 +827,20 @@ export class ScrapilooLoanImpl {
    * Organization number
    */
   readonly organization_number?: StringType;
+  readonly payment_pause?: {
+    /**
+     * Payment pause interval, e.g. "1 month per _year_"
+     */
+    readonly interval?: UnitType;
+    /**
+     * Max payment pause time
+     */
+    readonly time?: IntegerType;
+    /**
+     * Unit of payment pause time
+     */
+    readonly unit?: UnitType;
+  };
   readonly payment_reminder_fee?: {
     /**
      * Payment reminder fee amount
