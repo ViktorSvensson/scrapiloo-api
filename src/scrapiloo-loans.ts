@@ -81,6 +81,10 @@ export interface ScrapilooLoan {
      */
     readonly min?: FloatType;
   };
+  /**
+   * Calculation example
+   */
+  readonly calculation_example?: StringType;
   readonly cancellation_period?: {
     /**
      * Agreement cancellation period
@@ -539,6 +543,10 @@ export class ScrapilooLoanImpl {
      */
     readonly min?: FloatType;
   };
+  /**
+   * Calculation example
+   */
+  readonly calculation_example?: StringType;
   readonly cancellation_period?: {
     /**
      * Agreement cancellation period
