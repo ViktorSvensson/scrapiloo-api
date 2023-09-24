@@ -400,3 +400,22 @@ describe("BooleanType: Negating", () => {
     expect(data(undefined, "boolean").negate().valueOf()).toStrictEqual(true);
   });
 });
+
+describe("Serialization", () => {
+  test("Can serialize IntegerType", () => {
+    const value = data(123, "integer").setConfig({
+      unit: "day",
+      displayInterval: true,
+      displayUnit: true,
+    });
+    const json = JSON.stringify(value);
+    expect(json).toEqual(
+      '{"type":"integer","value":123,"config":{"unit":{"type":"unit","value":"day"},"displayInterval":true}}'
+    );
+    const unserialized = JSON.parse(json);
+    const restored = data(unserialized?.value, "integer").setConfig(
+      unserialized?.config ?? {}
+    );
+    expect(restored).toEqual(value);
+  });
+});

@@ -61,4 +61,28 @@ export class DataTypeImpl {
     toSortable() {
         throw new Error("Method not implemented.");
     }
+    toJSON() {
+        const res = { type: this.type };
+        // We don't need to serialize undefined or null; when we unserialize
+        // the value will be instanciated as null anyway.
+        if (typeof this.value !== "undefined" && this.value !== null) {
+            res.value = this.value;
+        }
+        // Only serialize config values that have been set explicitly, i.e.
+        // ignore default config.
+        if (__classPrivateFieldGet(this, _DataTypeImpl_config, "f")) {
+            res.config = { ...__classPrivateFieldGet(this, _DataTypeImpl_config, "f") };
+            // Remove config attributes that are either null/undefined or
+            // are identical to the default config value.
+            for (const k in res.config) {
+                res.config[k] =
+                    typeof res.config[k] === "undefined" ||
+                        res.config[k] === null ||
+                        res.config[k] === this.defaultConfig?.[k]
+                        ? undefined
+                        : res.config[k];
+            }
+        }
+        return res;
+    }
 }

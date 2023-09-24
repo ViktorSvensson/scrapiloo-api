@@ -27,4 +27,5 @@ export declare abstract class DataTypeImpl<T extends string | number | boolean |
     toString(): string;
     isNull(): boolean;
     toSortable(): number;
+    toJSON(): object;
 }

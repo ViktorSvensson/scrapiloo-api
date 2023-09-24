@@ -59,4 +59,8 @@ export interface DataType<T extends unknown = unknown, C = {}> {
      * Returns a stringified value.
      */
     toString(): string;
+    /**
+     * Returns a serializable representation of the DataType.
+     */
+    toJSON(): object;
 }
