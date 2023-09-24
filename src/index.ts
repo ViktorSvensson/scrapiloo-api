@@ -14,6 +14,11 @@ import {type ScrapilooLoan} from "./ScrapilooLoan";
 import {data} from "./data";
 import {type TypeName} from "./types/DataType";
 
+export type * from "./ScrapilooLoan";
+export type * from "./types";
+
+export {data} from "./data";
+
 export class BaseEntry {}
 
 interface ScrapilooDatasetMap {

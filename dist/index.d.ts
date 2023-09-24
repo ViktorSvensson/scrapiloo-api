@@ -10,6 +10,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 import { type ScrapilooLoan } from "./ScrapilooLoan";
+export type * from "./ScrapilooLoan";
+export type * from "./types";
+export { data } from "./data";
 export declare class BaseEntry {
 }
 interface ScrapilooDatasetMap {
@@ -46,4 +49,3 @@ export default function Scrapiloo<D extends keyof ScrapilooDatasetMap, B extends
     get: (key: string) => T & B;
     all: () => (T & B)[];
 }>;
-export {};

@@ -11,8 +11,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 
-import {ReactNode} from "react";
-import {data} from "./data";
+import type {ReactNode} from "react";
+import {data} from ".";
 
 describe("IntegerType: Convert", () => {
   test("Can make unit conversions from year", () => {

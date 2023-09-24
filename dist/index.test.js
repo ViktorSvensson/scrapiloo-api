@@ -10,7 +10,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
-import { data } from "./data";
+import { data } from ".";
 describe("IntegerType: Convert", () => {
     test("Can make unit conversions from year", () => {
         const x = data(3, "integer").setConfig({ unit: "year" });

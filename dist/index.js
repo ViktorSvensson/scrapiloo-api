@@ -10,6 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 import { data } from "./data";
+export { data } from "./data";
 export class BaseEntry {
 }
 /**
