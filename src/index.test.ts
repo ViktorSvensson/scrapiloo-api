@@ -47,37 +47,37 @@ describe("IntegerType: Flexible unit", () => {
       data(6, "integer")
         .setFlexibleUnit("month", ["day", "month", "year"])
         .pretty()
-    ).toEqual("6 mån");
+    ).toEqual("6 mån");
     expect(
       data(13, "integer")
         .setFlexibleUnit("month", ["day", "month", "year"])
         .pretty()
-    ).toEqual("1 år");
+    ).toEqual("1 år");
     expect(
       data(2, "integer")
         .setFlexibleUnit("year", ["day", "month", "year"])
         .pretty()
-    ).toEqual("2 år");
+    ).toEqual("2 år");
     expect(
       data(13.4, "integer")
         .setFlexibleUnit("year", ["day", "month", "year"])
         .pretty()
-    ).toEqual("13 år");
+    ).toEqual("13 år");
     expect(
       data(13.5, "integer")
         .setFlexibleUnit("year", ["day", "month", "year"])
         .pretty()
-    ).toEqual("14 år");
+    ).toEqual("14 år");
     expect(
       data(364, "integer")
         .setFlexibleUnit("day", ["day", "month", "year"])
         .pretty()
-    ).toEqual("1 år");
+    ).toEqual("1 år");
     expect(
       data(370, "integer")
         .setFlexibleUnit("day", ["day", "month", "year"])
         .pretty()
-    ).toEqual("1 år");
+    ).toEqual("1 år");
   });
 });
 
@@ -110,7 +110,7 @@ describe("IntegerType: Interval", () => {
       displayUnit: true,
     });
     expect(x.changeInterval("month", "month").pretty()).toEqual(
-      `10 000 kr/mån`
+      `10 000 kr/mån`
     );
   });
   test("Does not print unit when unit and currency is null", () => {
@@ -126,7 +126,7 @@ describe("IntegerType: Interval", () => {
       displayInterval: true,
       displayUnit: true,
     });
-    expect(x.pretty()).toEqual(`10 000 kr`);
+    expect(x.pretty()).toEqual(`10 000 kr`);
   });
 });
 
