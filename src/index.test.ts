@@ -11,7 +11,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 
-import {data} from ".";
+import {ReactNode} from "react";
+import {data} from "./data";
 
 describe("IntegerType: Convert", () => {
   test("Can make unit conversions from year", () => {
@@ -318,5 +319,84 @@ describe("TimeType: Can calculate duration", () => {
     expect(
       data("00:00", "time").getDuration(data("09:45", "time")).minutes
     ).toEqual(9 * 60 + 45);
+  });
+});
+
+describe("BooleanType: Printing", () => {
+  test("Can pretty print boolean values", () => {
+    expect(data(true, "boolean").pretty()).toEqual("Ja");
+    expect(data(false, "boolean").pretty()).toEqual("Nej");
+    expect(data(null, "boolean").pretty()).toEqual("–");
+    expect(data(false, "boolean").pretty()).toEqual("Nej");
+  });
+  test("Can pretty print non-boolean values", () => {
+    expect(data("aksdjaklsdjl" as any, "boolean").pretty()).toEqual("–");
+    expect(data(123123123 as any, "boolean").pretty()).toEqual("–");
+    expect(data(null, "boolean").pretty()).toEqual("–");
+    expect(data(undefined, "boolean").pretty()).toEqual("–");
+  });
+});
+
+describe("BooleanType: Label config", () => {
+  test("Can use another trueLabel", () => {
+    expect(
+      data(true, "boolean").setConfig({trueLabel: "Oui"}).pretty()
+    ).toEqual("Oui");
+    expect(
+      data(false, "boolean").setConfig({trueLabel: "Oui"}).pretty()
+    ).toEqual("Nej");
+  });
+  test("Can use another falseLabel", () => {
+    expect(
+      data(false, "boolean").setConfig({falseLabel: "Never"}).pretty()
+    ).toEqual("Never");
+    expect(
+      data(true, "boolean").setConfig({falseLabel: "Never"}).pretty()
+    ).toEqual("Ja");
+  });
+  test("Can use both trueLabel and falseLabel", () => {
+    expect(
+      data(false, "boolean")
+        .setConfig({trueLabel: "Oui", falseLabel: "Never"})
+        .pretty()
+    ).toEqual("Never");
+    expect(
+      data(true, "boolean")
+        .setConfig({trueLabel: "Oui", falseLabel: "Never"})
+        .pretty()
+    ).toEqual("Oui");
+  });
+
+  test("Can use React Elements as labels", () => {
+    const trueLabel: ReactNode = {
+      children: "Yes",
+      key: null,
+      props: null,
+      type: "div",
+    };
+    const falseLabel: ReactNode = {
+      children: "No",
+      key: null,
+      props: null,
+      type: "div",
+    };
+
+    expect(
+      data(false, "boolean").setConfig({trueLabel, falseLabel}).pretty()
+    ).toBe(falseLabel);
+    expect(
+      data(true, "boolean").setConfig({trueLabel, falseLabel}).pretty()
+    ).toBe(trueLabel);
+  });
+});
+
+describe("BooleanType: Negating", () => {
+  test("Can negate boolean values", () => {
+    expect(data(true, "boolean").negate().valueOf()).toStrictEqual(false);
+    expect(data(false, "boolean").negate().valueOf()).toStrictEqual(true);
+  });
+  test("Can negate non-boolean values", () => {
+    expect(data(null, "boolean").negate().valueOf()).toStrictEqual(true);
+    expect(data(undefined, "boolean").negate().valueOf()).toStrictEqual(true);
   });
 });
