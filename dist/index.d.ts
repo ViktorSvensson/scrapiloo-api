@@ -18,7 +18,7 @@ export declare class BaseEntry {
 }
 interface ScrapilooDatasetMap {
     loans: ScrapilooLoan;
-    pet_insurance: ScrapilooPetInsurance;
+    pet_insurances: ScrapilooPetInsurance;
 }
 /**
  * Creates an API data source.

@@ -24,7 +24,7 @@ export class BaseEntry {}
 
 interface ScrapilooDatasetMap {
   loans: ScrapilooLoan;
-  pet_insurance: ScrapilooPetInsurance;
+  pet_insurances: ScrapilooPetInsurance;
 }
 
 /**
