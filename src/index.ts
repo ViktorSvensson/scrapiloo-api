@@ -11,6 +11,7 @@
  */
 
 import {type ScrapilooLoan} from "./ScrapilooLoan";
+import {ScrapilooPetInsurance} from "./ScrapilooPetInsurance";
 import {data} from "./data";
 import {type TypeName} from "./types/DataType";
 
@@ -23,6 +24,7 @@ export class BaseEntry {}
 
 interface ScrapilooDatasetMap {
   loans: ScrapilooLoan;
+  pet_insurance: ScrapilooPetInsurance;
 }
 
 /**

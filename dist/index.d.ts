@@ -10,6 +10,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 import { type ScrapilooLoan } from "./ScrapilooLoan";
+import { ScrapilooPetInsurance } from "./ScrapilooPetInsurance";
 export type * from "./ScrapilooLoan";
 export type * from "./types";
 export { data } from "./data";
@@ -17,6 +18,7 @@ export declare class BaseEntry {
 }
 interface ScrapilooDatasetMap {
     loans: ScrapilooLoan;
+    pet_insurance: ScrapilooPetInsurance;
 }
 /**
  * Creates an API data source.
