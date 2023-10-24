@@ -20,6 +20,7 @@ export interface UnitTypeConfig {
 export interface UnitType extends DataType<UnitName> {
   readonly type: "unit";
   readonly value: UnitName;
+  readonly config: UnitTypeConfig;
 
   /**
    * Calculates the conversion factor when converting this unit
