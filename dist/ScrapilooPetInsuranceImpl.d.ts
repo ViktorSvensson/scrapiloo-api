@@ -1,10 +1,28 @@
-import { BooleanType, CurrencyType, IntegerType, StringType, TimeType, URLType, UnitType } from ".";
+/**
+ * @author     Carl Viktor Svensson
+ * @author     Kelsie Maria Enqvist
+ * @license    Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+ */
+import type { BooleanType, CurrencyType, IntegerType, StringType, TimeType, URLType, UnitType } from "./types";
 export declare class ScrapilooPetInsuranceImpl {
     readonly __key?: string;
     readonly compensation?: {
         readonly currency?: CurrencyType;
         readonly max?: IntegerType;
         readonly min?: IntegerType;
+    };
+    readonly coverage?: {
+        readonly c_section?: BooleanType;
+        readonly ct_scan?: BooleanType;
+        readonly forl?: BooleanType;
+        readonly mri_scan?: BooleanType;
     };
     readonly deductible_period?: {
         readonly time?: IntegerType;

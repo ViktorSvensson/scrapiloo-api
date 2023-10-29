@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 
-import {
+import type {
   BooleanType,
   CurrencyType,
   IntegerType,
@@ -19,7 +19,7 @@ import {
   TimeType,
   URLType,
   UnitType,
-} from ".";
+} from "./types";
 
 export interface ScrapilooPetInsurance {
   readonly __key?: string;
@@ -27,6 +27,12 @@ export interface ScrapilooPetInsurance {
     readonly currency?: CurrencyType;
     readonly max?: IntegerType;
     readonly min?: IntegerType;
+  };
+  readonly coverage?: {
+    readonly c_section?: BooleanType;
+    readonly ct_scan?: BooleanType;
+    readonly forl?: BooleanType;
+    readonly mri_scan?: BooleanType;
   };
   readonly deductible_period?: {
     readonly time?: IntegerType;

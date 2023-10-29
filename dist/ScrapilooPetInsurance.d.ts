@@ -10,13 +10,19 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
-import { BooleanType, CurrencyType, IntegerType, StringType, TimeType, URLType, UnitType } from ".";
+import type { BooleanType, CurrencyType, IntegerType, StringType, TimeType, URLType, UnitType } from "./types";
 export interface ScrapilooPetInsurance {
     readonly __key?: string;
     readonly compensation?: {
         readonly currency?: CurrencyType;
         readonly max?: IntegerType;
         readonly min?: IntegerType;
+    };
+    readonly coverage?: {
+        readonly c_section?: BooleanType;
+        readonly ct_scan?: BooleanType;
+        readonly forl?: BooleanType;
+        readonly mri_scan?: BooleanType;
     };
     readonly deductible_period?: {
         readonly time?: IntegerType;
