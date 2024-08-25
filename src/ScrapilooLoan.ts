@@ -1,13 +1,29 @@
+/**
+ * @author     Carl Viktor Svensson
+ * @author     Kelsie Maria Enqvist
+ * @license    Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+ */
+
 import type {
-  BooleanType,
-  CurrencyType,
   FloatType,
+  UnitType,
+  BooleanType,
   IntegerType,
+  CurrencyType,
   StringType,
   TimeType,
+  ImageType,
+  DateType,
   URLType,
-  UnitType,
-} from "./types";
+  TypeName,
+} from ".";
 
 export interface ScrapilooLoan {
   readonly __key?: string;
@@ -58,6 +74,9 @@ export interface ScrapilooLoan {
     readonly unit?: UnitType;
   };
   readonly annual_interest?: {
+    /**
+     * Interval used when presenting annual interest
+     */
     readonly interval?: UnitType;
     /**
      * Minimum annual interest rate
@@ -167,6 +186,10 @@ export interface ScrapilooLoan {
      */
     readonly creditsafe?: BooleanType;
     /**
+     * Uses Syna
+     */
+    readonly syna?: BooleanType;
+    /**
      * Uses UC as credit report agency
      */
     readonly uc?: BooleanType;
@@ -230,6 +253,10 @@ export interface ScrapilooLoan {
      * Interval of interest payments
      */
     readonly interval?: UnitType;
+    /**
+     * Last interest revision date
+     */
+    readonly last_revision?: DateType;
     /**
      * Maximum interest rate
      */
@@ -298,6 +325,9 @@ export interface ScrapilooLoan {
      * ZIP code
      */
     readonly zip?: StringType;
+  };
+  readonly metrics?: {
+    readonly approval?: FloatType;
   };
   readonly minimum_payment?: {
     /**
@@ -421,11 +451,6 @@ export interface ScrapilooLoan {
      * Unit of minimum residency
      */
     readonly unit?: UnitType;
-  };
-  readonly score_adjustment?: {
-    readonly availability?: FloatType;
-    readonly experience?: FloatType;
-    readonly safety?: FloatType;
   };
   readonly setup_fee?: {
     readonly amount?: FloatType;
