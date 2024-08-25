@@ -56,6 +56,24 @@ export class FloatTypeImpl extends DataTypeImpl {
         x = data(x, "float");
         return this.value < x.value;
     }
+    greaterThanOrEqual(x) {
+        x = data(x, "float");
+        return this.value >= x.value;
+    }
+    lessThanOrEqual(x) {
+        x = data(x, "float");
+        return this.value <= x.value;
+    }
+    equals(x, precision = 2) {
+        x = data(x, "float");
+        if (this.isNull() && x.isNull())
+            return true;
+        if (this.isNull() || x.isNull())
+            return false;
+        const factor = Math.pow(10, precision);
+        return (Math.round(this.value * factor) === Math.round(x.value * factor) ||
+            Math.abs(this.value - x.value) < 10 ** -precision);
+    }
     setConfig(config) {
         if ("unit" in config) {
             config.unit =
@@ -91,7 +109,7 @@ export class FloatTypeImpl extends DataTypeImpl {
         return val;
     }
     isNull() {
-        return typeof this.valueOf() !== "number";
+        return typeof this.value !== "number";
     }
     convert(fromUnit, toUnit) {
         fromUnit =

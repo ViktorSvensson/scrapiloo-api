@@ -47,6 +47,23 @@ export class IntegerTypeImpl
     return this.value < x.value;
   }
 
+  greaterThanOrEqual(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value >= x.value;
+  }
+
+  lessThanOrEqual(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value <= x.value;
+  }
+
+  equals(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "integer");
+    if (this.isNull() && x.isNull()) return true;
+    if (this.isNull() || x.isNull()) return false;
+    return this.valueOf() === x.valueOf();
+  }
+
   protected defaultConfig: IntegerTypeConfig = {
     decimals: 0,
     unit: null,
@@ -99,7 +116,7 @@ export class IntegerTypeImpl
   }
 
   isNull(): boolean {
-    return typeof this.valueOf() !== "number";
+    return typeof this.value !== "number";
   }
   convert(fromUnit: UnitType | UnitName, toUnit: UnitName): IntegerType {
     fromUnit =

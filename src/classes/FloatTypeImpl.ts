@@ -68,6 +68,29 @@ export class FloatTypeImpl
     return this.value < x.value;
   }
 
+  greaterThanOrEqual(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value >= x.value;
+  }
+
+  lessThanOrEqual(x: number | IntegerType | FloatType): boolean {
+    x = data(x, "float");
+    return this.value <= x.value;
+  }
+
+  equals(x: number | IntegerType | FloatType, precision: number = 2): boolean {
+    x = data(x, "float");
+
+    if (this.isNull() && x.isNull()) return true;
+    if (this.isNull() || x.isNull()) return false;
+
+    const factor = Math.pow(10, precision);
+    return (
+      Math.round(this.value * factor) === Math.round(x.value * factor) ||
+      Math.abs(this.value - x.value) < 10 ** -precision
+    );
+  }
+
   setConfig(config: Partial<FloatTypeConfig>): this {
     if ("unit" in config) {
       config.unit =
@@ -107,7 +130,7 @@ export class FloatTypeImpl
     return val;
   }
   isNull() {
-    return typeof this.valueOf() !== "number";
+    return typeof this.value !== "number";
   }
 
   convert(fromUnit: UnitType | UnitName, toUnit: UnitName): this {

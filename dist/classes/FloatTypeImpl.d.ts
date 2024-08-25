@@ -19,6 +19,9 @@ export declare class FloatTypeImpl extends DataTypeImpl<number, "float", FloatTy
     sub(x: FloatType | IntegerType | number): this & FloatType;
     greaterThan(x: number | IntegerType | FloatType): boolean;
     lessThan(x: number | IntegerType | FloatType): boolean;
+    greaterThanOrEqual(x: number | IntegerType | FloatType): boolean;
+    lessThanOrEqual(x: number | IntegerType | FloatType): boolean;
+    equals(x: number | IntegerType | FloatType, precision?: number): boolean;
     setConfig(config: Partial<FloatTypeConfig>): this;
     pretty(): string;
     isNull(): boolean;

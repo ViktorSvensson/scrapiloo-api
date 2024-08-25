@@ -45,6 +45,22 @@ export class IntegerTypeImpl extends DataTypeImpl {
         x = data(x, "float");
         return this.value < x.value;
     }
+    greaterThanOrEqual(x) {
+        x = data(x, "float");
+        return this.value >= x.value;
+    }
+    lessThanOrEqual(x) {
+        x = data(x, "float");
+        return this.value <= x.value;
+    }
+    equals(x) {
+        x = data(x, "integer");
+        if (this.isNull() && x.isNull())
+            return true;
+        if (this.isNull() || x.isNull())
+            return false;
+        return this.valueOf() === x.valueOf();
+    }
     setConfig(config) {
         if ("unit" in config) {
             config.unit =
@@ -82,7 +98,7 @@ export class IntegerTypeImpl extends DataTypeImpl {
         return Math.round(this.value);
     }
     isNull() {
-        return typeof this.valueOf() !== "number";
+        return typeof this.value !== "number";
     }
     convert(fromUnit, toUnit) {
         fromUnit =

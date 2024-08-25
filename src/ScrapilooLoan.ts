@@ -12,17 +12,15 @@
  */
 
 import type {
-  FloatType,
-  UnitType,
   BooleanType,
-  IntegerType,
   CurrencyType,
+  DateType,
+  FloatType,
+  IntegerType,
   StringType,
   TimeType,
-  ImageType,
-  DateType,
   URLType,
-  TypeName,
+  UnitType,
 } from ".";
 
 export interface ScrapilooLoan {

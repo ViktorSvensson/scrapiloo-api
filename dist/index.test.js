@@ -187,6 +187,16 @@ describe("FloatType: Performs logical operations", () => {
         expect(data(3, "float").lessThan(data(2, "float"))).toEqual(false);
         expect(data(3, "float").lessThan(data(3, "float"))).toEqual(false);
     });
+    test("Can use greaterThanOrEqual", () => {
+        expect(data(4.4, "float").greaterThanOrEqual(3.1)).toEqual(true);
+        expect(data(3.5, "float").greaterThanOrEqual(3.5)).toEqual(true);
+        expect(data(3.5, "float").greaterThanOrEqual(4)).toEqual(false);
+    });
+    test("Can use lessThanOrEqual", () => {
+        expect(data(3.3, "float").lessThanOrEqual(3.5)).toEqual(true);
+        expect(data(3.5, "float").lessThanOrEqual(3.5)).toEqual(true);
+        expect(data(3.5, "float").lessThanOrEqual(3.4)).toEqual(false);
+    });
 });
 describe("IntegerType: Performs logical operations", () => {
     test("Can use greaterThan", () => {
@@ -204,6 +214,16 @@ describe("IntegerType: Performs logical operations", () => {
         expect(data(3, "integer").lessThan(data(4, "integer"))).toEqual(true);
         expect(data(3, "integer").lessThan(data(2, "float"))).toEqual(false);
         expect(data(3, "integer").lessThan(data(3, "float"))).toEqual(false);
+    });
+    test("Can use greaterThanOrEqual", () => {
+        expect(data(4, "integer").greaterThanOrEqual(4)).toEqual(true);
+        expect(data(5, "integer").greaterThanOrEqual(6)).toEqual(false);
+        expect(data(5, "integer").greaterThanOrEqual(5)).toEqual(true);
+    });
+    test("Can use lessThanOrEqual", () => {
+        expect(data(3, "integer").lessThanOrEqual(4)).toEqual(true);
+        expect(data(5, "integer").lessThanOrEqual(4)).toEqual(false);
+        expect(data(5, "integer").lessThanOrEqual(5)).toEqual(true);
     });
 });
 describe("TimeType: Can calculate duration", () => {

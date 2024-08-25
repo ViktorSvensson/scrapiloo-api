@@ -31,4 +31,20 @@ export interface NumericType {
      * @param x
      */
     lessThan(x: IntegerType | FloatType | number): boolean;
+    /**
+     * Checks if value is greater than or equal to x.
+     * @param x
+     */
+    greaterThanOrEqual(x: IntegerType | FloatType | number): boolean;
+    /**
+     * Checks if value is less than or equal to x.
+     * @param x
+     */
+    lessThanOrEqual(x: IntegerType | FloatType | number): boolean;
+    /**
+     * Checks if value is equal to x.
+     * @param x
+     */
+    equals(x: IntegerType | FloatType | number): boolean;
+    equals(x: IntegerType | FloatType | number, precision: number): boolean;
 }

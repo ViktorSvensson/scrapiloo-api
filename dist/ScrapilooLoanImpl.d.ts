@@ -10,7 +10,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
-import type { FloatType, UnitType, BooleanType, IntegerType, CurrencyType, StringType, TimeType, DateType, URLType } from ".";
+import type { BooleanType, CurrencyType, DateType, FloatType, IntegerType, StringType, TimeType, URLType, UnitType } from ".";
 export declare class ScrapilooLoanImpl {
     readonly __key?: string;
     /**

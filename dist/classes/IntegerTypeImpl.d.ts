@@ -7,6 +7,9 @@ export declare class IntegerTypeImpl extends DataTypeImpl<number, "integer", Int
     sub(x: FloatType | IntegerType | number): this & IntegerType;
     greaterThan(x: number | IntegerType | FloatType): boolean;
     lessThan(x: number | IntegerType | FloatType): boolean;
+    greaterThanOrEqual(x: number | IntegerType | FloatType): boolean;
+    lessThanOrEqual(x: number | IntegerType | FloatType): boolean;
+    equals(x: number | IntegerType | FloatType): boolean;
     protected defaultConfig: IntegerTypeConfig;
     setConfig(config: Partial<IntegerTypeConfig>): this;
     pretty(): string;
