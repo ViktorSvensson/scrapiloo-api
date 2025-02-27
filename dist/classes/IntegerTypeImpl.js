@@ -2,17 +2,6 @@ import { data } from "../data";
 import { DataTypeImpl } from "./DataTypeImpl";
 import { UnitTypeImpl } from "./UnitTypeImpl";
 export class IntegerTypeImpl extends DataTypeImpl {
-    constructor() {
-        super(...arguments);
-        this.defaultConfig = {
-            decimals: 0,
-            unit: null,
-            interval: null,
-            currency: null,
-            displayUnit: true,
-            displayInterval: false,
-        };
-    }
     mul(x) {
         x = data(x, "float");
         if (this.isNull() || x.isNull())
@@ -61,6 +50,14 @@ export class IntegerTypeImpl extends DataTypeImpl {
             return false;
         return this.valueOf() === x.valueOf();
     }
+    defaultConfig = {
+        decimals: 0,
+        unit: null,
+        interval: null,
+        currency: null,
+        displayUnit: true,
+        displayInterval: false,
+    };
     setConfig(config) {
         if ("unit" in config) {
             config.unit =

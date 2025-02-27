@@ -61,28 +61,28 @@ describe("IntegerType: Flexible unit", () => {
 });
 describe("IntegerType: Interval", () => {
     test("Can change interval from year", () => {
-        const x = data(10000, "integer").setConfig({ unit: "year" });
-        expect(x.changeInterval("year", "year").valueOf()).toEqual(10000);
+        const x = data(10_000, "integer").setConfig({ unit: "year" });
+        expect(x.changeInterval("year", "year").valueOf()).toEqual(10_000);
         expect(x.changeInterval("year", "month").valueOf()).toEqual(833);
         expect(x.changeInterval("year", "day").valueOf()).toEqual(27);
         expect(x.changeInterval("year", "week").valueOf()).toEqual(192);
     });
     test("Can change interval from day", () => {
-        const x = data(10000, "integer").setConfig({ unit: "day" });
-        expect(x.changeInterval("day", "day").valueOf()).toEqual(10000);
-        expect(x.changeInterval("day", "month").valueOf()).toEqual(10000 * 30.4);
-        expect(x.changeInterval("day", "year").valueOf()).toEqual(10000 * 365);
-        expect(x.changeInterval("day", "week").valueOf()).toEqual(10000 * 7);
+        const x = data(10_000, "integer").setConfig({ unit: "day" });
+        expect(x.changeInterval("day", "day").valueOf()).toEqual(10_000);
+        expect(x.changeInterval("day", "month").valueOf()).toEqual(10_000 * 30.4);
+        expect(x.changeInterval("day", "year").valueOf()).toEqual(10_000 * 365);
+        expect(x.changeInterval("day", "week").valueOf()).toEqual(10_000 * 7);
     });
     test("Can change interval from month", () => {
-        const x = data(10000, "integer").setConfig({ unit: "month" });
-        expect(x.changeInterval("month", "month").valueOf()).toEqual(10000);
+        const x = data(10_000, "integer").setConfig({ unit: "month" });
+        expect(x.changeInterval("month", "month").valueOf()).toEqual(10_000);
         expect(x.changeInterval("month", "day").valueOf()).toEqual(329);
-        expect(x.changeInterval("month", "year").valueOf()).toEqual(120000);
+        expect(x.changeInterval("month", "year").valueOf()).toEqual(120_000);
         expect(x.changeInterval("month", "week").valueOf()).toEqual(2303);
     });
     test("Can pretty print with interval and currency", () => {
-        const x = data(10000, "integer").setConfig({
+        const x = data(10_000, "integer").setConfig({
             currency: "kr",
             displayInterval: true,
             displayUnit: true,
@@ -90,14 +90,14 @@ describe("IntegerType: Interval", () => {
         expect(x.changeInterval("month", "month").pretty()).toEqual(`10 000 kr/mån`);
     });
     test("Does not print unit when unit and currency is null", () => {
-        const x = data(10000, "integer").setConfig({
+        const x = data(10_000, "integer").setConfig({
             displayInterval: true,
             displayUnit: true,
         });
         expect(x.changeInterval("month", "month").pretty()).toEqual(`10 000/mån`);
     });
     test("Does not print interval when interval is null", () => {
-        const x = data(10000, "integer").setConfig({
+        const x = data(10_000, "integer").setConfig({
             currency: "kr",
             displayInterval: true,
             displayUnit: true,

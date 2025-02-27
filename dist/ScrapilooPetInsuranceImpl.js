@@ -11,4 +11,33 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
 export class ScrapilooPetInsuranceImpl {
+    __key;
+    compensation;
+    coverage;
+    deductible_period;
+    deductible;
+    direct_settlement;
+    /**
+     * Primary email address
+     */
+    email;
+    /**
+     * online vet appointments included
+     */
+    free_vet_consultation;
+    grace_period;
+    hidden_fault_insurance;
+    life_insurance;
+    location;
+    name;
+    opening_hours;
+    /**
+     * Organization number
+     */
+    organization_number;
+    /**
+     * Phone number
+     */
+    phone;
+    tracking;
 }

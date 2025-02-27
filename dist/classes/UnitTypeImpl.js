@@ -1,18 +1,15 @@
 import { DataTypeImpl } from "./DataTypeImpl";
 export class UnitTypeImpl extends DataTypeImpl {
-    constructor() {
-        super(...arguments);
-        this.defaultConfig = {
-            form: "abbr",
-            translations: {
-                day: { abbr: "d", singular: "dag", plural: "dagar" },
-                month: { abbr: "mån", singular: "månad", plural: "månader" },
-                year: { abbr: "år", singular: "år", plural: "år" },
-                week: { abbr: "v", singular: "vecka", plural: "veckor" },
-                percent: { abbr: "%", singular: "%", plural: "%" },
-            },
-        };
-    }
+    defaultConfig = {
+        form: "abbr",
+        translations: {
+            day: { abbr: "d", singular: "dag", plural: "dagar" },
+            month: { abbr: "mån", singular: "månad", plural: "månader" },
+            year: { abbr: "år", singular: "år", plural: "år" },
+            week: { abbr: "v", singular: "vecka", plural: "veckor" },
+            percent: { abbr: "%", singular: "%", plural: "%" },
+        },
+    };
     getConversionFactor(toUnit) {
         return unitConversion(this.valueOf(), toUnit);
     }

@@ -1,13 +1,10 @@
 import { data } from "../data";
 import { DataTypeImpl } from "./DataTypeImpl";
 export class BooleanTypeImpl extends DataTypeImpl {
-    constructor() {
-        super(...arguments);
-        this.defaultConfig = {
-            trueLabel: "Ja",
-            falseLabel: "Nej",
-        };
-    }
+    defaultConfig = {
+        trueLabel: "Ja",
+        falseLabel: "Nej",
+    };
     pretty() {
         if (this.value === true)
             return this.config.trueLabel;
