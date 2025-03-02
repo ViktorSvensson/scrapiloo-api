@@ -10,7 +10,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
-import type { BooleanType, CurrencyType, DateType, FloatType, IntegerType, StringType, TimeType, URLType, UnitType } from ".";
+import type { BooleanType, CurrencyType, DateType, FloatType, IntegerType, StringType, TimeType, UnitType, URLType } from ".";
 export declare class ScrapilooLoanImpl {
     readonly __key?: string;
     /**
@@ -28,6 +28,7 @@ export declare class ScrapilooLoanImpl {
         readonly currency?: CurrencyType;
         /**
          * Administration fee interval
+         * @default "month"
          */
         readonly interval?: UnitType;
         /**
@@ -46,6 +47,7 @@ export declare class ScrapilooLoanImpl {
         readonly max?: IntegerType;
         /**
          * Minimum age
+         * @default 18
          */
         readonly min?: IntegerType;
     };
@@ -62,6 +64,7 @@ export declare class ScrapilooLoanImpl {
     readonly annual_interest?: {
         /**
          * Interval used when presenting annual interest
+         * @default "year"
          */
         readonly interval?: UnitType;
         /**
@@ -80,15 +83,18 @@ export declare class ScrapilooLoanImpl {
     readonly cancellation_period?: {
         /**
          * Agreement cancellation period
+         * @default 14
          */
         readonly time?: IntegerType;
         /**
          * Unit of cancellation period time
+         * @default "day"
          */
         readonly unit?: UnitType;
     };
     /**
      * Category
+     * @default "privatlan"
      */
     readonly category?: StringType;
     readonly connected_banks?: {
@@ -177,6 +183,7 @@ export declare class ScrapilooLoanImpl {
         readonly syna?: BooleanType;
         /**
          * Uses UC as credit report agency
+         * @default true
          */
         readonly uc?: BooleanType;
     };
@@ -227,16 +234,19 @@ export declare class ScrapilooLoanImpl {
     readonly interest_free?: {
         /**
          * Interest free time
+         * @default 0
          */
         readonly time?: IntegerType;
         /**
          * Unit of interest free time
+         * @default "day"
          */
         readonly unit?: UnitType;
     };
     readonly interest?: {
         /**
          * Interval of interest payments
+         * @default "year"
          */
         readonly interval?: UnitType;
         /**
@@ -254,6 +264,7 @@ export declare class ScrapilooLoanImpl {
     };
     /**
      * Is high cost credit, according to Swedish definition
+     * @default false
      */
     readonly is_high_cost_credit?: BooleanType;
     readonly late_payment_fee?: {
@@ -269,6 +280,7 @@ export declare class ScrapilooLoanImpl {
     readonly late_payment_interest?: {
         /**
          * Late payment interest interval
+         * @default "year"
          */
         readonly interval?: UnitType;
         /**
@@ -291,6 +303,7 @@ export declare class ScrapilooLoanImpl {
         readonly fee?: FloatType;
         /**
          * E.g. "monthly_payment" or "credit_amount"
+         * @default "monthly_payment"
          */
         readonly fee_basis?: StringType;
     };
@@ -341,6 +354,7 @@ export declare class ScrapilooLoanImpl {
         readonly time?: IntegerType;
         /**
          * Unit of offer validity time
+         * @default "day"
          */
         readonly unit?: UnitType;
     };
@@ -381,6 +395,7 @@ export declare class ScrapilooLoanImpl {
     readonly payment_pause?: {
         /**
          * Payment pause interval, e.g. "1 month per _year_"
+         * @default "year"
          */
         readonly interval?: UnitType;
         /**
@@ -395,6 +410,7 @@ export declare class ScrapilooLoanImpl {
     readonly payment_reminder_fee?: {
         /**
          * Payment reminder fee amount
+         * @default 60
          */
         readonly amount?: FloatType;
         /**
@@ -425,6 +441,7 @@ export declare class ScrapilooLoanImpl {
         readonly currency?: CurrencyType;
         /**
          * Interval of required income
+         * @default "month"
          */
         readonly interval?: UnitType;
     };
@@ -450,6 +467,17 @@ export declare class ScrapilooLoanImpl {
          */
         readonly min?: FloatType;
     };
+    readonly status?: {
+        /**
+         * Is active
+         * @default true
+         */
+        readonly active?: BooleanType;
+        /**
+         * Key of other entry that this entry has been merged with
+         */
+        readonly merged_with?: StringType;
+    };
     readonly term?: {
         /**
          * Loan term (in days)
@@ -461,6 +489,7 @@ export declare class ScrapilooLoanImpl {
         readonly min?: IntegerType;
         /**
          * Loan term unit (days, years, months etc.)
+         * @default "year"
          */
         readonly unit?: UnitType;
     };
@@ -477,9 +506,14 @@ export declare class ScrapilooLoanImpl {
          * Currency of withdrawal fee
          */
         readonly currency?: CurrencyType;
+        /**
+         * Withdrawal fee percentage
+         */
+        readonly percent?: FloatType;
     };
     /**
      * Does not require any security
+     * @default true
      */
     readonly without_security?: BooleanType;
 }

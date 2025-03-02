@@ -27,6 +27,7 @@ export class ScrapilooLoanImpl {
     cancellation_period;
     /**
      * Category
+     * @default "privatlan"
      */
     category;
     connected_banks;
@@ -44,6 +45,7 @@ export class ScrapilooLoanImpl {
     interest;
     /**
      * Is high cost credit, according to Swedish definition
+     * @default false
      */
     is_high_cost_credit;
     late_payment_fee;
@@ -69,11 +71,13 @@ export class ScrapilooLoanImpl {
     required_income;
     residency_requirement;
     setup_fee;
+    status;
     term;
     tracking;
     withdrawal_fee;
     /**
      * Does not require any security
+     * @default true
      */
     without_security;
 }
