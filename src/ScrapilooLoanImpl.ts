@@ -19,8 +19,8 @@ import type {
   IntegerType,
   StringType,
   TimeType,
-  URLType,
   UnitType,
+  URLType,
 } from ".";
 
 export class ScrapilooLoanImpl {
@@ -40,6 +40,7 @@ export class ScrapilooLoanImpl {
     readonly currency?: CurrencyType;
     /**
      * Administration fee interval
+     * @default "month"
      */
     readonly interval?: UnitType;
     /**
@@ -58,6 +59,7 @@ export class ScrapilooLoanImpl {
     readonly max?: IntegerType;
     /**
      * Minimum age
+     * @default 18
      */
     readonly min?: IntegerType;
   };
@@ -74,6 +76,7 @@ export class ScrapilooLoanImpl {
   readonly annual_interest?: {
     /**
      * Interval used when presenting annual interest
+     * @default "year"
      */
     readonly interval?: UnitType;
     /**
@@ -92,15 +95,18 @@ export class ScrapilooLoanImpl {
   readonly cancellation_period?: {
     /**
      * Agreement cancellation period
+     * @default 14
      */
     readonly time?: IntegerType;
     /**
      * Unit of cancellation period time
+     * @default "day"
      */
     readonly unit?: UnitType;
   };
   /**
    * Category
+   * @default "privatlan"
    */
   readonly category?: StringType;
   readonly connected_banks?: {
@@ -189,6 +195,7 @@ export class ScrapilooLoanImpl {
     readonly syna?: BooleanType;
     /**
      * Uses UC as credit report agency
+     * @default true
      */
     readonly uc?: BooleanType;
   };
@@ -239,16 +246,19 @@ export class ScrapilooLoanImpl {
   readonly interest_free?: {
     /**
      * Interest free time
+     * @default 0
      */
     readonly time?: IntegerType;
     /**
      * Unit of interest free time
+     * @default "day"
      */
     readonly unit?: UnitType;
   };
   readonly interest?: {
     /**
      * Interval of interest payments
+     * @default "year"
      */
     readonly interval?: UnitType;
     /**
@@ -266,6 +276,7 @@ export class ScrapilooLoanImpl {
   };
   /**
    * Is high cost credit, according to Swedish definition
+   * @default false
    */
   readonly is_high_cost_credit?: BooleanType;
   readonly late_payment_fee?: {
@@ -281,6 +292,7 @@ export class ScrapilooLoanImpl {
   readonly late_payment_interest?: {
     /**
      * Late payment interest interval
+     * @default "year"
      */
     readonly interval?: UnitType;
     /**
@@ -303,6 +315,7 @@ export class ScrapilooLoanImpl {
     readonly fee?: FloatType;
     /**
      * E.g. "monthly_payment" or "credit_amount"
+     * @default "monthly_payment"
      */
     readonly fee_basis?: StringType;
   };
@@ -353,6 +366,7 @@ export class ScrapilooLoanImpl {
     readonly time?: IntegerType;
     /**
      * Unit of offer validity time
+     * @default "day"
      */
     readonly unit?: UnitType;
   };
@@ -393,6 +407,7 @@ export class ScrapilooLoanImpl {
   readonly payment_pause?: {
     /**
      * Payment pause interval, e.g. "1 month per _year_"
+     * @default "year"
      */
     readonly interval?: UnitType;
     /**
@@ -407,6 +422,7 @@ export class ScrapilooLoanImpl {
   readonly payment_reminder_fee?: {
     /**
      * Payment reminder fee amount
+     * @default 60
      */
     readonly amount?: FloatType;
     /**
@@ -437,6 +453,7 @@ export class ScrapilooLoanImpl {
     readonly currency?: CurrencyType;
     /**
      * Interval of required income
+     * @default "month"
      */
     readonly interval?: UnitType;
   };
@@ -462,6 +479,17 @@ export class ScrapilooLoanImpl {
      */
     readonly min?: FloatType;
   };
+  readonly status?: {
+    /**
+     * Is active
+     * @default true
+     */
+    readonly active?: BooleanType;
+    /**
+     * Key of other entry that this entry has been merged with
+     */
+    readonly merged_with?: StringType;
+  };
   readonly term?: {
     /**
      * Loan term (in days)
@@ -473,6 +501,7 @@ export class ScrapilooLoanImpl {
     readonly min?: IntegerType;
     /**
      * Loan term unit (days, years, months etc.)
+     * @default "year"
      */
     readonly unit?: UnitType;
   };
@@ -489,9 +518,14 @@ export class ScrapilooLoanImpl {
      * Currency of withdrawal fee
      */
     readonly currency?: CurrencyType;
+    /**
+     * Withdrawal fee percentage
+     */
+    readonly percent?: FloatType;
   };
   /**
    * Does not require any security
+   * @default true
    */
   readonly without_security?: BooleanType;
 }
