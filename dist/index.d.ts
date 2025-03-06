@@ -9,6 +9,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
  */
+import { ScrapilooCard } from "./ScrapilooCard";
 import { type ScrapilooLoan } from "./ScrapilooLoan";
 import { ScrapilooPetInsurance } from "./ScrapilooPetInsurance";
 export type * from "./ScrapilooLoan";
@@ -19,6 +20,7 @@ export declare class BaseEntry {
 interface ScrapilooDatasetMap {
     loans: ScrapilooLoan;
     pet_insurances: ScrapilooPetInsurance;
+    cards: ScrapilooCard;
 }
 /**
  * Creates an API data source.
